@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enkel Summa — Automatización Inteligente para tu Negocio</title>
+<meta name="description" content="Automatizamos tus procesos con IA. Módulo contable incluido. Estudio de factibilidad gratuito. Para PYMES y freelancers en México y Latinoamérica.">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0e0e0e;--white:#f5f3ee;--accent:#c8f060;--accent2:#60c8f0;--gray:#2a2a2a;--muted:#888;--border:rgba(255,255,255,0.08)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:"DM Sans",sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Syne",sans-serif}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 4rem;background:rgba(14,14,14,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.logo{font-family:"Syne",sans-serif;font-size:1.3rem;font-weight:800;letter-spacing:-.5px}.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem}.nav-links a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .2s}.nav-links a:hover{color:var(--white)}
+.nav-cta{background:var(--accent);color:var(--black);padding:.5rem 1.2rem;border-radius:100px;font-size:.85rem;font-weight:500;text-decoration:none;font-family:"Syne",sans-serif;transition:transform .2s}.nav-cta:hover{transform:scale(1.04);background:#d4f570}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 4rem 4rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 60% 50% at 80% 40%,rgba(200,240,96,.08) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 20% 70%,rgba(96,200,240,.06) 0%,transparent 60%)}
+.hero-grid{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px}
+.hero-content{position:relative;z-index:1;max-width:780px}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(200,240,96,.1);border:1px solid rgba(200,240,96,.25);color:var(--accent);padding:6px 14px;border-radius:100px;font-size:.8rem;font-weight:500;margin-bottom:2rem;animation:fadeUp .6s ease both}.hero-tag::before{content:"";width:6px;height:6px;background:var(--accent);border-radius:50%}
+h1.hero-title{font-size:clamp(3rem,7vw,5.5rem);font-weight:800;line-height:1.0;letter-spacing:-2px;margin-bottom:1.5rem;animation:fadeUp .6s ease .1s both}
+h1.hero-title em{font-style:normal;color:var(--accent)}
+.hero-sub{font-size:1.1rem;color:var(--muted);max-width:540px;margin-bottom:2.5rem;line-height:1.7;animation:fadeUp .6s ease .2s both}
+.hero-actions{display:flex;gap:1rem;align-items:center;animation:fadeUp .6s ease .3s both;flex-wrap:wrap}
+.btn-primary{background:var(--accent);color:var(--black);padding:.85rem 2rem;border-radius:100px;font-family:"Syne",sans-serif;font-weight:700;font-size:.95rem;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 0 30px rgba(200,240,96,.25)}.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(200,240,96,.4)}
+.btn-secondary{color:var(--white);text-decoration:none;font-size:.95rem;display:flex;align-items:center;gap:6px;opacity:.7;transition:opacity .2s}.btn-secondary:hover{opacity:1}
+.hero-stats{display:flex;gap:3rem;margin-top:5rem;padding-top:2rem;border-top:1px solid var(--border);animation:fadeUp .6s ease .4s both;flex-wrap:wrap}
+.stat-num{font-family:"Syne",sans-serif;font-size:2rem;font-weight:800}.stat-num span{color:var(--accent)}.stat-label{font-size:.8rem;color:var(--muted);margin-top:2px}
+section{padding:6rem 4rem}
+.section-tag{font-size:.75rem;text-transform:uppercase;letter-spacing:3px;color:var(--accent);font-weight:600;margin-bottom:1rem}
+.section-title{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-1px;margin-bottom:1rem;line-height:1.1}
+.section-sub{color:var(--muted);max-width:500px;line-height:1.7}
+.factibilidad-banner{background:rgba(200,240,96,.06);border:1px solid rgba(200,240,96,.2);border-radius:16px;padding:2rem 2.5rem;margin-bottom:4rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap}
+.fact-icon{font-size:2.5rem;flex-shrink:0}
+.fact-title{font-family:"Syne",sans-serif;font-size:1.15rem;font-weight:800;margin-bottom:.4rem}.fact-title span{color:var(--accent)}
+.fact-desc{font-size:.9rem;color:var(--muted);line-height:1.6}
+.fact-cta{background:var(--accent);color:var(--black);padding:.6rem 1.4rem;border-radius:100px;font-family:"Syne",sans-serif;font-weight:700;font-size:.85rem;text-decoration:none;white-space:nowrap;transition:transform .2s}.fact-cta:hover{transform:scale(1.04)}
+.services{background:var(--black)}
+.segment-tabs{display:flex;margin-top:2rem;border:1px solid var(--border);border-radius:12px;overflow:hidden;width:fit-content}
+.seg-tab{padding:.7rem 1.5rem;cursor:pointer;font-family:"Syne",sans-serif;font-size:.85rem;font-weight:600;color:var(--muted);background:transparent;border:none;transition:all .25s;display:flex;align-items:center;gap:8px}
+.seg-tab.active{background:var(--accent);color:var(--black)}.seg-tab:not(.active):hover{color:var(--white);background:rgba(255,255,255,.04)}
+.seg-dot{width:7px;height:7px;border-radius:50%}.dot-pyme{background:#185FA5}.dot-pf{background:#3B6D11}.seg-tab.active .seg-dot{background:var(--black)}
+.segment-panel{display:none}.segment-panel.active{display:block}
+.segment-intro{padding:1.5rem;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:12px;margin-bottom:1.5rem;display:flex;gap:2rem;align-items:center;flex-wrap:wrap}
+.seg-intro-title{font-family:"Syne",sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.4rem}
+.seg-intro-desc{font-size:.88rem;color:var(--muted);line-height:1.6}
+.seg-intro-target{display:flex;flex-wrap:wrap;gap:8px;margin-top:.75rem}
+.target-chip{font-size:.75rem;padding:4px 12px;border:1px solid var(--border);border-radius:100px;color:var(--muted)}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5px;background:var(--border)}
+.service-card{background:var(--black);padding:2rem;transition:background .3s;position:relative;overflow:hidden}
+.service-card:hover{background:#141414}
+.service-card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .3s}.service-card:hover::before{opacity:1}
+.service-num{font-family:"Syne",sans-serif;font-size:.75rem;color:var(--muted);margin-bottom:1.5rem;letter-spacing:2px}
+.service-icon{width:44px;height:44px;border-radius:10px;background:rgba(200,240,96,.1);border:1px solid rgba(200,240,96,.2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:1.2rem}
+.service-title{font-size:1.05rem;font-weight:700;margin-bottom:.6rem}
+.service-desc{font-size:.88rem;color:var(--muted);line-height:1.6}
+.service-tag{display:inline-block;margin-top:1rem;font-size:.72rem;padding:3px 10px;border:1px solid var(--border);border-radius:100px;color:var(--muted);letter-spacing:.5px}
+.calculator{background:#111}
+.calc-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.how-to{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:1.5rem}
+.how-title{font-size:.75rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent);font-weight:600;margin-bottom:1rem}
+.how-step{display:flex;gap:12px;margin-bottom:.85rem;align-items:flex-start}
+.how-num{width:22px;height:22px;border-radius:50%;background:rgba(200,240,96,.15);border:1px solid rgba(200,240,96,.3);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--accent);flex-shrink:0;margin-top:1px}
+.how-text{font-size:.875rem;color:var(--muted);line-height:1.6}.how-text strong{color:var(--white)}
+.example-box{background:rgba(96,200,240,.05);border:1px solid rgba(96,200,240,.15);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem}
+.ex-title{font-size:.75rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent2);font-weight:600;margin-bottom:.75rem}
+.ex-profile{display:flex;align-items:center;gap:10px;margin-bottom:.75rem}
+.ex-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:var(--black);flex-shrink:0}
+.ex-name{font-size:.9rem;font-weight:600}.ex-role{font-size:.75rem;color:var(--muted)}
+.ex-row{display:flex;justify-content:space-between;font-size:.82rem;padding:.3rem 0;border-bottom:1px solid rgba(255,255,255,.04)}.ex-row:last-child{border:none}
+.ex-label{color:var(--muted)}.ex-val{font-weight:500}
+.ex-val.red{color:#F09595}.ex-val.green{color:#97C459}.ex-val.accent{color:var(--accent)}
+.ex-result{margin-top:.75rem;padding:.6rem .9rem;background:rgba(200,240,96,.08);border-radius:8px;font-size:.82rem;color:var(--accent);font-style:italic;line-height:1.5}
+.calc-widget{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:16px;padding:2rem;position:sticky;top:100px}
+.calc-widget-title{font-family:"Syne",sans-serif;font-size:1.1rem;font-weight:800;margin-bottom:.4rem}
+.calc-widget-sub{font-size:.85rem;color:var(--muted);margin-bottom:1.5rem}
+.slider-group{margin-bottom:1.25rem}
+.slider-top{display:flex;justify-content:space-between;margin-bottom:.4rem}
+.slider-label{font-size:.82rem;color:var(--muted)}.slider-val{font-size:.85rem;font-weight:600;color:var(--white)}
+input[type=range]{width:100%;accent-color:var(--accent);height:4px;cursor:pointer}
+.calc-result{background:var(--black);border-radius:12px;padding:1.25rem;margin-top:1.5rem}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem}
+.result-item{text-align:center;padding:.75rem;background:rgba(255,255,255,.03);border-radius:8px}
+.result-num{font-family:"Syne",sans-serif;font-size:1.3rem;font-weight:800}
+.result-num.red{color:#F09595}.result-num.green{color:#97C459}.result-num.accent{color:var(--accent)}
+.result-lbl{font-size:.7rem;color:var(--muted);margin-top:2px;line-height:1.3}
+.result-phrase{background:rgba(200,240,96,.06);border:1px solid rgba(200,240,96,.15);border-radius:8px;padding:.75rem 1rem;font-size:.8rem;color:var(--accent);line-height:1.6;font-style:italic;margin-top:.75rem}
+.calc-cta{display:block;text-align:center;margin-top:1rem;background:var(--accent);color:var(--black);padding:.75rem;border-radius:100px;font-family:"Syne",sans-serif;font-weight:700;font-size:.85rem;text-decoration:none;transition:all .2s}.calc-cta:hover{background:#d4f570;transform:translateY(-1px)}
+.disclaimer{margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:10px}
+.disclaimer-title{font-size:.72rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:.5rem;font-weight:600}
+.disclaimer-text{font-size:.75rem;color:var(--muted);line-height:1.6;opacity:.8}.disclaimer-text a{color:var(--muted);text-decoration:underline}
+.pricing{background:#0a0a0a}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:3rem}
+.price-card{background:#111;border:1px solid var(--border);border-radius:16px;padding:2rem;transition:border-color .3s;position:relative}
+.price-card:hover{border-color:rgba(200,240,96,.2)}.price-card.featured{border-color:rgba(200,240,96,.5)}
+.price-card.featured::before{content:"Mas popular";position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--black);font-family:"Syne",sans-serif;font-size:.7rem;font-weight:700;padding:3px 14px;border-radius:0 0 8px 8px}
+.price-seg{font-size:.72rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:.5rem}
+.price-name{font-family:"Syne",sans-serif;font-size:1.2rem;font-weight:800;margin-bottom:1rem}
+.price-amount{display:flex;align-items:baseline;gap:4px;margin-bottom:.2rem}
+.price-val{font-family:"Syne",sans-serif;font-size:2.5rem;font-weight:800}
+.price-currency{font-size:1rem;color:var(--muted)}
+.price-period{font-size:.8rem;color:var(--muted);margin-bottom:.3rem}
+.price-usd{font-size:.75rem;color:var(--muted);opacity:.65;margin-bottom:.25rem}
+.price-fx-note{font-size:.68rem;color:var(--muted);opacity:.55;margin-bottom:1.2rem;line-height:1.4;font-style:italic}
+.price-divider{height:1px;background:var(--border);margin-bottom:1.5rem}
+.price-items{display:flex;flex-direction:column;gap:.7rem}
+.price-item{display:flex;align-items:flex-start;gap:.6rem;font-size:.88rem;color:var(--muted)}
+.price-check{color:var(--accent);font-weight:700;flex-shrink:0;margin-top:1px}
+.price-note{font-size:.78rem;color:var(--accent);margin-top:1rem;padding:.5rem .75rem;background:rgba(200,240,96,.06);border-radius:8px;border:1px solid rgba(200,240,96,.15)}
+.price-cta{display:block;text-align:center;margin-top:1.5rem;background:transparent;border:1px solid var(--border);color:var(--white);padding:.7rem;border-radius:100px;font-family:"Syne",sans-serif;font-size:.85rem;font-weight:600;text-decoration:none;transition:all .2s}.price-cta:hover{border-color:var(--accent);color:var(--accent)}
+.price-card.featured .price-cta{background:var(--accent);border-color:var(--accent);color:var(--black)}.price-card.featured .price-cta:hover{background:#d4f570}
+.fx-global-note{font-size:.72rem;color:var(--muted);opacity:.6;text-align:center;margin-top:2rem;line-height:1.7;max-width:620px;margin-left:auto;margin-right:auto;padding:0 1rem}
+.about{background:var(--black)}
+.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.about-visual{position:relative;height:380px;background:var(--gray);border-radius:20px;overflow:hidden;border:1px solid var(--border)}
+.about-visual-inner{position:absolute;inset:0;background:linear-gradient(135deg,rgba(200,240,96,.06) 0%,rgba(96,200,240,.04) 100%);display:flex;align-items:center;justify-content:center}
+.flow-diagram{display:flex;flex-direction:column;gap:1rem;padding:2rem;width:100%}
+.flow-step{display:flex;align-items:center;gap:1rem;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:.75rem 1rem;font-size:.85rem;font-family:"Syne",sans-serif;font-weight:600;animation:pulse 3s ease-in-out infinite}
+.flow-step:nth-child(2){animation-delay:.5s}.flow-step:nth-child(3){animation-delay:1s}.flow-step:nth-child(4){animation-delay:1.5s}
+.flow-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.flow-arrow{text-align:center;color:var(--muted);font-size:.8rem}
+.about-list{list-style:none;margin-top:2rem;display:flex;flex-direction:column;gap:1rem}
+.about-list li{display:flex;gap:1rem;align-items:flex-start;font-size:.95rem;color:var(--muted);line-height:1.6}
+.about-list li::before{content:"???";color:var(--accent);font-weight:700;flex-shrink:0;margin-top:1px}
+.testimonials{background:#111}
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem}
+.testimonial-card{background:var(--black);border:1px solid var(--border);border-radius:16px;padding:2rem;transition:border-color .3s}.testimonial-card:hover{border-color:rgba(200,240,96,.3)}
+.testimonial-quote{font-size:2rem;color:var(--accent);margin-bottom:1rem;line-height:1}
+.testimonial-text{font-size:.9rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem}
+.testimonial-author{display:flex;align-items:center;gap:.75rem}
+.author-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:"Syne",sans-serif;font-weight:800;font-size:.85rem;color:var(--black)}
+.author-name{font-weight:600;font-size:.9rem}.author-role{font-size:.78rem;color:var(--muted)}
+.coming-soon-badge{display:inline-block;font-size:.72rem;padding:3px 10px;background:rgba(200,240,96,.1);border:1px solid rgba(200,240,96,.2);color:var(--accent);border-radius:100px;margin-bottom:1.5rem}
+.contact{background:#0a0a0a}
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.contact-form{display:flex;flex-direction:column;gap:1rem}
+.form-group{display:flex;flex-direction:column;gap:.4rem}
+.form-group label{font-size:.8rem;color:var(--muted);letter-spacing:.5px}
+.form-group input,.form-group textarea,.form-group select{background:#161616;border:1px solid var(--border);border-radius:10px;padding:.75rem 1rem;color:var(--white);font-family:"DM Sans",sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;resize:none}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:rgba(200,240,96,.4)}
+.form-group select option{background:#161616}
+.form-submit{background:var(--accent);color:var(--black);border:none;padding:.9rem 2rem;border-radius:100px;font-family:"Syne",sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;transition:transform .2s,box-shadow .2s;margin-top:.5rem;width:100%}.form-submit:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(200,240,96,.3)}
+.contact-info{display:flex;flex-direction:column;gap:1.5rem;margin-top:3rem}
+.contact-item{display:flex;gap:1rem;align-items:flex-start}
+.contact-icon{width:40px;height:40px;border-radius:10px;background:rgba(200,240,96,.08);border:1px solid rgba(200,240,96,.15);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.contact-item-label{font-size:.78rem;color:var(--muted)}.contact-item-value{font-size:.95rem;font-weight:500}
+footer{padding:2rem 4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:"Syne",sans-serif;font-weight:800;font-size:1rem}.footer-logo span{color:var(--accent)}
+footer p{font-size:.8rem;color:var(--muted)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:.7}50%{opacity:1}}
+@media(max-width:768px){nav{padding:1rem 1.5rem}.nav-links{display:none}section,.hero{padding:4rem 1.5rem}.calc-layout,.about-inner,.contact-inner{grid-template-columns:1fr}.calc-widget{position:static}.hero-stats{gap:1.5rem}footer{padding:1.5rem;flex-direction:column;text-align:center}.segment-tabs{width:100%}.seg-tab{flex:1;justify-content:center}.factibilidad-banner{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Enkel<span>.</span>Summa</div>
+  <div class="nav-links">
+    <a href="#servicios">Servicios</a>
+    <a href="#calculadora">Calculadora</a>
+    <a href="#precios">Precios</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <a href="#contacto" class="nav-cta">Estudio gratuito</a>
+</nav>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Automatizacion Inteligente &middot; Gotemburgo, Suecia</div>
+    <h1 class="hero-title">Tu negocio<br>en <em>piloto<br>automatico</em></h1>
+    <p class="hero-sub">Automatizamos tus procesos con IA, conectamos tus herramientas y llevamos tu contabilidad sin esfuerzo. Para PYMES y profesionistas independientes en Mexico y LATAM.</p>
+    <div class="hero-actions">
+      <a href="#calculadora" class="btn-primary">Cuanto estas perdiendo hoy?</a>
+      <a href="#servicios" class="btn-secondary">Ver servicios &darr;</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">80<span>%</span></div><div class="stat-label">menos tareas manuales</div></div>
+      <div><div class="stat-num">24<span>/7</span></div><div class="stat-label">procesos funcionando</div></div>
+      <div><div class="stat-num">3<span> planes</span></div><div class="stat-label">para cada negocio</div></div>
+      <div><div class="stat-num">100<span>%</span></div><div class="stat-label">hecho con IA</div></div>
+    </div>
+  </div>
+</section>
+<section class="services" id="servicios">
+  <div class="factibilidad-banner">
+    <div class="fact-icon">&#128269;</div>
+    <div style="flex:1;min-width:200px">
+      <div class="fact-title">Estudio de factibilidad <span>100% gratuito</span></div>
+      <div class="fact-desc">No sabes si tu negocio califica o por donde empezar. Lo analizamos sin costo y sin compromiso. En 24 horas te decimos exactamente que puedes automatizar y cuanto tiempo y dinero recuperarias.</div>
+    </div>
+    <a href="#contacto" class="fact-cta">Solicitalo aqui &rarr;</a>
+  </div>
+  <div class="section-tag">Servicios</div>
+  <h2 class="section-title">Soluciones para<br>cada tipo de negocio</h2>
+  <p class="section-sub" style="margin-bottom:1.5rem">Selecciona tu perfil y descubre exactamente lo que podemos hacer por ti.</p>
+  <div class="segment-tabs">
+    <button class="seg-tab active" id="tab-pyme"><span class="seg-dot dot-pyme"></span> PYMES</button>
+    <button class="seg-tab" id="tab-pf"><span class="seg-dot dot-pf"></span> Persona fisica / Freelancer</button>
+  </div>
+  <div class="segment-panel active" id="panel-pyme" style="margin-top:1.5rem">
+    <div class="segment-intro">
+      <div style="flex:1;min-width:200px">
+        <div class="seg-intro-title">Para pequenas y medianas empresas</div>
+        <div class="seg-intro-desc">Automatizamos las operaciones de tu negocio para que tu equipo deje de perder tiempo en tareas repetitivas y se enfoque en crecer.</div>
+        <div class="seg-intro-target">
+          <span class="target-chip">Tiendas en linea</span><span class="target-chip">Agencias</span><span class="target-chip">Servicios profesionales</span><span class="target-chip">Comercios</span><span class="target-chip">Distribuidoras</span>
+        </div>
+      </div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card"><div class="service-num">01</div><div class="service-icon">&#9889;</div><div class="service-title">Analisis inteligente de correos</div><div class="service-desc">Analizamos tu correo electronico con IA para clasificar, priorizar y organizar tus mensajes automaticamente. Sin importar que plataforma uses.</div><span class="service-tag">IA &middot; Cualquier proveedor</span></div>
+      <div class="service-card"><div class="service-num">02</div><div class="service-icon">&#128260;</div><div class="service-title">Conexion automatica entre tus herramientas</div><div class="service-desc">Hacemos que todas tus aplicaciones se pasen informacion solas. Lo que hoy haces a mano, copiar datos, avisar a alguien, actualizar registros, lo hacemos automatico.</div><span class="service-tag">Sin codigo &middot; Sin complicaciones</span></div>
+      <div class="service-card"><div class="service-num">03</div><div class="service-icon">&#128202;</div><div class="service-title">Reportes e informes en tiempo real</div><div class="service-desc">Conectamos tus datos a Google Sheets o Excel para que tengas visibilidad total de tu negocio sin armar el reporte tu mismo cada semana.</div><span class="service-tag">Google Sheets &middot; Excel &middot; Power BI</span></div>
+      <div class="service-card"><div class="service-num">04</div><div class="service-icon">&#129518;</div><div class="service-title">Modulo contable automatizado</div><div class="service-desc">Conciliacion bancaria, cuentas por cobrar y pagar, indicadores financieros y alertas fiscales, todo actualizado automaticamente. Sin contratar un contador de tiempo completo.</div><span class="service-tag">Contabilidad &middot; Finanzas &middot; Fiscal</span></div>
+    </div>
+  </div>
+  <div class="segment-panel" id="panel-pf" style="margin-top:1.5rem">
+    <div class="segment-intro">
+      <div style="flex:1;min-width:200px">
+        <div class="seg-intro-title">Para freelancers y profesionistas independientes</div>
+        <div class="seg-intro-desc">Trabaja solo pero opera como empresa. Automatizamos tu administracion para que dediques tu tiempo a lo que realmente genera dinero.</div>
+        <div class="seg-intro-target">
+          <span class="target-chip">Consultores</span><span class="target-chip">Disenadores</span><span class="target-chip">Contadores</span><span class="target-chip">Abogados</span><span class="target-chip">Coaches</span><span class="target-chip">Creadores de contenido</span>
+        </div>
+      </div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card"><div class="service-num">01</div><div class="service-icon">&#128193;</div><div class="service-title">Organizacion digital personal</div><div class="service-desc">Correos, clientes, tareas y proyectos organizados automaticamente. Deja de perder tiempo buscando informacion y opera como una empresa profesional.</div><span class="service-tag">Correo &middot; Clientes &middot; Proyectos</span></div>
+      <div class="service-card"><div class="service-num">02</div><div class="service-icon">&#128176;</div><div class="service-title">Contabilidad personal simplificada</div><div class="service-desc">Registramos tus ingresos y gastos automaticamente, calculamos tu IVA e ISR, llevamos tu flujo de caja y te avisamos antes de cada declaracion fiscal. Sin ser contador.</div><span class="service-tag">IVA &middot; ISR &middot; Flujo de caja &middot; Declaraciones</span></div>
+      <div class="service-card"><div class="service-num">03</div><div class="service-icon">&#9889;</div><div class="service-title">Analisis inteligente de correos</div><div class="service-desc">Tu bandeja de entrada organizada con IA. Nunca mas pierdas un correo importante ni pierdas tiempo clasificando mensajes manualmente.</div><span class="service-tag">IA &middot; Automatizacion &middot; Cualquier correo</span></div>
+      <div class="service-card"><div class="service-num">04</div><div class="service-icon">&#129302;</div><div class="service-title">Atencion y respuestas automaticas</div><div class="service-desc">Tu negocio responde mensajes y gestiona clientes incluso cuando no estas disponible. Con IA que se comunica con tu propio estilo.</div><span class="service-tag">IA &middot; Correo &middot; Mensajeria</span></div>
+    </div>
+  </div>
+</section>
+<section class="calculator" id="calculadora">
+  <div class="section-tag">Calculadora de ahorro</div>
+  <h2 class="section-title">Descubre cuanto te<br>cuesta <em style="font-style:normal;color:var(--accent)">no automatizar</em></h2>
+  <p class="section-sub" style="margin-bottom:3rem">Cada hora que dedicas a tareas manuales es dinero que podrias estar generando. Calcula tu costo real en segundos.</p>
+  <div class="calc-layout">
+    <div>
+      <div class="how-to">
+        <div class="how-title">Como usar esta calculadora?</div>
+        <div class="how-step"><div class="how-num">1</div><div class="how-text"><strong>Mueve el primer slider</strong> para indicar cuantas horas al mes dedicas a tareas que podrian hacerse solas: revisar correos, bajar CFDIs del SAT, armar reportes, clasificar gastos, conciliar estados de cuenta, responder mensajes repetitivos.</div></div>
+        <div class="how-step"><div class="how-num">2</div><div class="how-text"><strong>Ajusta tu tarifa por hora</strong>: lo que cobras a tus clientes o lo que te pagarian por ese mismo tiempo. Si no cobras por hora, divide tu ingreso mensual entre las horas que trabajas.</div></div>
+        <div class="how-step"><div class="how-num">3</div><div class="how-text"><strong>Lee tu resultado</strong>: veras cuanto dinero estas dejando ir cada mes y cuanto recuperarias con el plan que te corresponde.</div></div>
+      </div>
+      <div class="example-box">
+        <div class="ex-title">Ejemplo real — caso tipico Mexico</div>
+        <div class="ex-profile">
+          <div class="ex-avatar">ML</div>
+          <div><div class="ex-name">Maria L. — Consultora independiente</div><div class="ex-role">Monterrey &middot; Factura $45,000 MXN/mes</div></div>
+        </div>
+        <div class="ex-row"><span class="ex-label">Horas/mes bajando CFDIs del SAT</span><span class="ex-val">3 hrs</span></div>
+        <div class="ex-row"><span class="ex-label">Horas/mes clasificando gastos</span><span class="ex-val">4 hrs</span></div>
+        <div class="ex-row"><span class="ex-label">Horas/mes revisando correos</span><span class="ex-val">6 hrs</span></div>
+        <div class="ex-row"><span class="ex-label">Total horas perdidas al mes</span><span class="ex-val accent">13 hrs</span></div>
+        <div class="ex-row"><span class="ex-label">Su tarifa por hora</span><span class="ex-val">$350 MXN</span></div>
+        <div class="ex-row"><span class="ex-label">Costo mensual del desorden</span><span class="ex-val red">-$4,550 MXN</span></div>
+        <div class="ex-row"><span class="ex-label">Plan Freelancer Enkel Summa</span><span class="ex-val">$1,500 MXN/mes (~$75 USD)</span></div>
+        <div class="ex-row"><span class="ex-label">Ahorro neto mensual</span><span class="ex-val green">+$3,050 MXN</span></div>
+        <div class="ex-result">"Con Enkel Summa recupero 13 horas al mes que dedico a conseguir un cliente mas. Eso vale mucho mas que los $1,500 que pago."</div>
+      </div>
+    </div>
+    <div>
+      <div class="calc-widget">
+        <div class="calc-widget-title">Tu calculadora personal</div>
+        <div class="calc-widget-sub">Ajusta los valores segun tu situacion real</div>
+        <div class="slider-group">
+          <div class="slider-top"><span class="slider-label">Horas/mes en tareas manuales</span><span class="slider-val" id="hrs-display">10 horas</span></div>
+          <input type="range" min="2" max="50" value="10" step="1" id="sl-hrs">
+        </div>
+        <div class="slider-group">
+          <div class="slider-top"><span class="slider-label">Tu valor por hora (MXN)</span><span class="slider-val" id="rate-display">$350 MXN</span></div>
+          <input type="range" min="100" max="1500" value="350" step="50" id="sl-rate">
+        </div>
+        <div class="calc-result">
+          <div class="result-grid">
+            <div class="result-item"><div class="result-num red" id="r-costo">$3,500</div><div class="result-lbl">pierdes al mes en tiempo</div></div>
+            <div class="result-item"><div class="result-num accent" id="r-plan">$1,500 MXN</div><div class="result-lbl">plan sugerido / mes</div></div>
+            <div class="result-item"><div class="result-num green" id="r-ahorro">+$2,000</div><div class="result-lbl">ahorro neto mensual</div></div>
+            <div class="result-item"><div class="result-num green" id="r-anual">+$24,000</div><div class="result-lbl">ahorro estimado al ano</div></div>
+          </div>
+          <div class="result-phrase" id="r-frase">"Estas perdiendo el equivalente a 10 horas de trabajo valioso cada mes. Con Enkel Summa ese tiempo lo recuperas desde el primer dia."</div>
+          <a href="#contacto" class="calc-cta">Solicitar estudio gratuito &rarr;</a>
+        </div>
+        <div class="disclaimer">
+          <div class="disclaimer-title">Nota sobre los calculos</div>
+          <div class="disclaimer-text">Estimaciones basadas en datos del <strong>INEGI</strong>, <strong>McKinsey Global Institute</strong> (2023) y la <strong>OCDE</strong>. El ahorro real dependera del tipo de negocio y procesos especificos. Esta herramienta tiene fines informativos y no garantiza un ahorro exacto. Para un analisis preciso solicita tu <a href="#contacto">estudio de factibilidad gratuito</a>.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="pricing" id="precios">
+  <div class="section-tag">Precios</div>
+  <h2 class="section-title">Invierte menos de lo<br>que ahorras cada mes</h2>
+  <p class="section-sub">Precios de lanzamiento para los primeros clientes en Mexico y LATAM.</p>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-seg">Persona fisica &middot; Freelancer</div>
+      <div class="price-name">Plan Freelancer</div>
+      <div class="price-amount"><span class="price-currency">$</span><span class="price-val">1,500</span><span class="price-currency">MXN</span></div>
+      <div class="price-period">por mes</div>
+      <div class="price-usd">~$75 USD &middot; segun tipo de cambio vigente</div>
+      <div class="price-fx-note">* El equivalente en USD es orientativo y se ajusta al tipo de cambio al momento de la transaccion.</div>
+      <div class="price-divider"></div>
+      <div class="price-items">
+        <div class="price-item"><span class="price-check">&#10003;</span> Organizacion de correos con IA</div>
+        <div class="price-item"><span class="price-check">&#10003;</span> Registro automatico de ingresos y gastos</div>
+        <div class="price-item"><span class="price-check">&#10003;</span> Calculo de IVA e ISR mensual</div>
+        <div class="price-item"><span class="price-check">&#10003;</span> Reporte financiero mensual</div>
+        <div class="price-item"><span class="price-check">&#10003;</span> Alertas de declaraciones fiscales</div>
+        <div class="price-item"><span class="price-check">&#10003;</span> Hasta 8,000 operaciones/mes incluidas</div>
+      </div>
+      <div class="price-note">&#10022; Incluye estudio de factibilidad gratuito</div>
+      <a href="#contacto" class="price-cta">Empezar ahora &rarr;</a>
+    </div>
+    <div class="price-card featured">
+      <div class="price-seg">PYME &middot; Negocio en crecimiento</div>
+      <div class="price-name">Plan Negocio</div>
+      <div class="price-amount"><span class="price-currency">$</span><span class="price-val">2,980</span><span class="price-currency">MXN</span></div>
+      <div class="price-period">por mes</div>
+      <div class="price-usd">~$149 USD &middot; segun tipo de cambio vigente</div>
+      <div class="price-fx-note">* El equivalente en USD es orientativo y se ajusta al tipo de cambio al momento de la transaccion.</div>
+      <div class="price-divider"></div>
+      <div class="price-items">
+        <div class="price-item"><span class="price-check">&#10003;</span> Todo lo del Plan Freelancer</div>
+        <div class="price-item"><span class="price-check">&#10003;</span> Conexion automatica de herramientas</div>
+        <div class="price-item"><span class="price-check">&#10003;</span> Dashboard financiero en tiempo real</div>
+        <div class="price-item"><span class="price-check">&#10003;</span> Modulo contable completo</div>
+        <div class="price-item"><span class="price-check">&#10003;</span> Conciliacion bancaria automatizada</div>
+        <div class="price-item"><span class="price-check">&#10003;</span> Soporte por WhatsApp</div>
+        <div class="price-item"><span class="price-check">&#10003;</span> Hasta 20,000 operaciones/mes incluidas</div>
+      </div>
+      <div class="price-note">&#10022; Incluye estudio de factibilidad gratuito</div>
+      <a href="#contacto" class="price-cta">Empezar ahora &rarr;</a>
+    </div>
+    <div class="price-card">
+      <div class="price-seg">PYME avanzada &middot; Empresa</div>
+      <div class="price-name">Plan Empresa</div>
+      <div class="price-amount"><span class="price-currency">$</span><span class="price-val">5,980</span><span class="price-currency">MXN</span></div>
+      <div class="price-period">por mes</div>
+      <div class="price-usd">~$299 USD &middot; segun tipo de cambio vigente</div>
+      <div class="price-fx-note">* El equivalente en USD es orientativo y se ajusta al tipo de cambio al momento de la transaccion.</div>
+      <div class="price-divider"></div>
+      <div class="price-items">
+        <div class="price-item"><span class="price-check">&#10003;</span> Todo lo del Plan Negocio</div>
+        <div class="price-item"><span class="price-check">&#10003;</span> Implementacion totalmente a medida</div>
+        <div class="price-item"><span class="price-check">&#10003;</span> Integraciones con sistemas propios</div>
+        <div class="price-item"><span class="price-check">&#10003;</span> Asesoria financiera mensual incluida</div>
+        <div class="price-item"><span class="price-check">&#10003;</span> Soporte prioritario 24/7</div>
+        <div class="price-item"><span class="price-check">&#10003;</span> Capacitacion para tu equipo</div>
+        <div class="price-item"><span class="price-check">&#10003;</span> Operaciones personalizadas segun volumen</div>
+      </div>
+      <div class="price-note">&#10022; Incluye estudio de factibilidad gratuito</div>
+      <a href="#contacto" class="price-cta">Empezar ahora &rarr;</a>
+    </div>
+  </div>
+  <p class="fx-global-note">* Los precios estan expresados en pesos mexicanos (MXN) como moneda de referencia. El equivalente en dolares estadounidenses (USD) es orientativo y se calcula con base en un tipo de cambio promedio (~$20 MXN/USD). El monto final se ajustara al tipo de cambio publicado por el Banco de Mexico (Banxico) vigente al momento de cada transaccion. Enkel Summa no asume responsabilidad por variaciones cambiarias.</p>
+</section>
+<section class="about" id="nosotros">
+  <div class="about-inner">
+    <div>
+      <div class="section-tag">Sobre nosotros</div>
+      <h2 class="section-title">Automatizacion<br>que realmente<br>funciona</h2>
+      <p style="color:var(--muted);margin-top:1rem;line-height:1.7;font-size:.95rem">Somos un equipo con experiencia en empresas multinacionales, tecnologia y finanzas, que decidio democratizar la automatizacion para pequenas y medianas empresas hispanohablantes.</p>
+      <p style="color:var(--muted);margin-top:1rem;line-height:1.7;font-size:.95rem">Basados en Gotemburgo, Suecia, combinamos la precision nordica con el dinamismo latino para construir sistemas que realmente te liberen tiempo.</p>
+      <ul class="about-list">
+        <li>Implementamos, no solo asesoramos, entregamos sistemas funcionando</li>
+        <li>Usamos las mismas herramientas en nuestro propio negocio</li>
+        <li>Experiencia en multinacionales como Pfizer, Bosch y Pepsi</li>
+        <li>Soporte continuo para que tu automatizacion nunca se detenga</li>
+      </ul>
+    </div>
+    <div class="about-visual">
+      <div class="about-visual-inner">
+        <div class="flow-diagram">
+          <div class="flow-step"><div class="flow-dot"></div> Llega un correo o solicitud</div>
+          <div class="flow-arrow">&#8595;</div>
+          <div class="flow-step"><div class="flow-dot"></div> La IA lo analiza y clasifica</div>
+          <div class="flow-arrow">&#8595;</div>
+          <div class="flow-step"><div class="flow-dot"></div> Se extrae la informacion clave</div>
+          <div class="flow-arrow">&#8595;</div>
+          <div class="flow-step"><div class="flow-dot"></div> Tu reporte se actualiza solo &#10003;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="testimonials" id="testimonios">
+  <div class="section-tag">Casos de exito</div>
+  <h2 class="section-title">Lo que dicen<br>nuestros clientes</h2>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="coming-soon-badge">Proximamente</div>
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Logramos reducir el tiempo de gestion de correos de 2 horas diarias a practicamente cero. El sistema clasifica, responde y reporta solo.</p>
+      <div class="testimonial-author"><div class="author-avatar">PM</div><div><div class="author-name">Primer cliente PYME</div><div class="author-role">En implementacion &middot; 2025</div></div></div>
+    </div>
+    <div class="testimonial-card">
+      <div class="coming-soon-badge">Proximamente</div>
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Por fin se cuanto gano y cuanto debo de impuestos sin calcular nada. El sistema me avisa antes de cada declaracion y tengo todo listo.</p>
+      <div class="testimonial-author"><div class="author-avatar">FL</div><div><div class="author-name">Primer cliente Freelancer</div><div class="author-role">En proceso &middot; 2025</div></div></div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Quieres ser parte de nuestros primeros casos de exito? Buscamos negocios en Mexico y LATAM que quieran automatizar a precio de lanzamiento.</p>
+      <div class="testimonial-author"><div class="author-avatar" style="background:linear-gradient(135deg,#c8f060,#60c8f0)">ES</div><div><div class="author-name">Enkel Summa</div><div class="author-role">Gotemburgo, Suecia</div></div></div>
+    </div>
+  </div>
+</section>
+<section class="contact" id="contacto">
+  <div class="contact-inner">
+    <div>
+      <div class="section-tag">Contacto</div>
+      <h2 class="section-title">Solicita tu estudio<br>de factibilidad<br><em style="font-style:normal;color:var(--accent)">gratuito</em></h2>
+      <p style="color:var(--muted);margin-top:1rem;font-size:.95rem;line-height:1.7">Cuentanos sobre tu negocio y en menos de 24 horas te decimos exactamente que puedes automatizar, cuanto tiempo recuperarias y que plan te conviene, sin costo y sin compromiso.</p>
+      <div class="contact-info">
+        <div class="contact-item"><div class="contact-icon">&#128205;</div><div><div class="contact-item-label">Ubicacion</div><div class="contact-item-value">Gotemburgo, Suecia</div></div></div>
+        <div class="contact-item"><div class="contact-icon">&#9993;</div><div><div class="contact-item-label">Email</div><div class="contact-item-value">hola@enkelsumma.com</div></div></div>
+        <div class="contact-item"><div class="contact-icon">&#127758;</div><div><div class="contact-item-label">Atendemos a</div><div class="contact-item-value">Mexico y Latinoamerica</div></div></div>
+      </div>
+    </div>
+    <form class="contact-form" id="contact-form">
+      <div class="form-group"><label>Nombre completo</label><input type="text" placeholder="Tu nombre"></div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="tu@empresa.com"></div>
+      <div class="form-group"><label>Empresa o actividad</label><input type="text" placeholder="Nombre de tu empresa o tu profesion"></div>
+      <div class="form-group"><label>Soy</label>
+        <select><option value="">Selecciona tu perfil</option><option>Dueno de PYME</option><option>Freelancer / Profesionista independiente</option><option>Emprendedor</option><option>Otro</option></select>
+      </div>
+      <div class="form-group"><label>Que proceso te gustaria mejorar?</label>
+        <select><option value="">Selecciona una opcion</option><option>Gestion de correos</option><option>Conexion entre mis herramientas</option><option>Reportes e informes</option><option>Contabilidad y finanzas / CFDIs</option><option>No se, quiero el estudio gratuito</option></select>
+      </div>
+      <div class="form-group"><label>Cuentanos sobre tu negocio</label><textarea rows="3" placeholder="Cuantas personas trabajan contigo? Que herramientas usas? Cual es tu mayor dolor operativo hoy?"></textarea></div>
+      <button type="submit" class="form-submit">Solicitar estudio gratuito &rarr;</button>
+    </form>
+  </div>
+</section>
+<footer>
+  <div class="footer-logo">Enkel<span>.</span>Summa</div>
+  <p>&copy; 2025 Enkel Summa &middot; Automatizacion Inteligente &middot; Gotemburgo, Suecia</p>
+  <p style="font-size:.78rem;color:var(--muted)">Hecho con IA &middot; Para Mexico y Latinoamerica</p>
+</footer>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("tab-pyme").addEventListener("click", function(){ switchTab("pyme"); });
+  document.getElementById("tab-pf").addEventListener("click", function(){ switchTab("pf"); });
+  function switchTab(seg) {
+    document.querySelectorAll(".seg-tab").forEach(function(t){ t.classList.remove("active"); });
+    document.querySelectorAll(".segment-panel").forEach(function(p){ p.classList.remove("active"); });
+    document.getElementById("tab-"+seg).classList.add("active");
+    document.getElementById("panel-"+seg).classList.add("active");
+  }
+  var slHrs = document.getElementById("sl-hrs");
+  var slRate = document.getElementById("sl-rate");
+  function recalc() {
+    var hrs = parseInt(slHrs.value);
+    var rate = parseInt(slRate.value);
+    document.getElementById("hrs-display").textContent = hrs + " horas";
+    document.getElementById("rate-display").textContent = "$" + rate.toLocaleString() + " MXN";
+    var costo = hrs * rate;
+    var planPrecio = costo >= 8000 ? 2980 : 1500;
+    var planNombre = costo >= 8000 ? "Plan Negocio (~$149 USD)" : "Plan Freelancer (~$75 USD)";
+    var ahorro = costo - planPrecio;
+    var anual = ahorro * 12;
+    document.getElementById("r-costo").textContent = "$" + costo.toLocaleString();
+    document.getElementById("r-plan").textContent = "$" + planPrecio.toLocaleString() + " MXN";
+    document.getElementById("r-ahorro").textContent = ahorro > 0 ? "+$" + ahorro.toLocaleString() : "$0";
+    document.getElementById("r-ahorro").className = "result-num " + (ahorro > 0 ? "green" : "red");
+    document.getElementById("r-anual").textContent = anual > 0 ? "+$" + anual.toLocaleString() : "$0";
+    document.getElementById("r-anual").className = "result-num " + (anual > 0 ? "green" : "red");
+    var frases = [
+      '"Estas dejando ir $' + costo.toLocaleString() + ' MXN al mes en tiempo que podria generarte mas clientes. Con Enkel Summa lo recuperas desde el primer dia."',
+      '"' + hrs + ' horas al mes de trabajo manual equivalen a $' + costo.toLocaleString() + ' MXN que no estas cobrando. Con Enkel Summa esas horas trabajan para ti."',
+      '"Cada mes que esperas cuesta $' + costo.toLocaleString() + ' MXN. El ' + planNombre + ' lo resuelve por $' + planPrecio.toLocaleString() + ' MXN. La decision es tuya."'
+    ];
+    document.getElementById("r-frase").textContent = frases[hrs % 3];
+  }
+  slHrs.addEventListener("input", recalc);
+  slRate.addEventListener("input", recalc);
+  recalc();
+  document.getElementById("contact-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    var btn = this.querySelector(".form-submit");
+    btn.textContent = "Solicitud enviada! Te contactamos en menos de 24 hrs";
+    btn.style.background = "#60c8f0";
+    setTimeout(function(){ btn.textContent = "Solicitar estudio gratuito"; btn.style.background = ""; }, 4000);
+  });
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.style.opacity = "1"; e.target.style.transform = "translateY(0)"; }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll(".service-card, .testimonial-card, .price-card, .contact-item, .how-step").forEach(function(el) {
+    el.style.opacity = "0";
+    el.style.transform = "translateY(20px)";
+    el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+    observer.observe(el);
+  });
+});
+</script>
+</body>
+</html>
