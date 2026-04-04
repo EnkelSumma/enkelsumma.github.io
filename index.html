@@ -586,19 +586,100 @@ footer p{font-size:.76rem;color:var(--muted)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{opacity:.65}50%{opacity:1}}
 
-/* ─── RESPONSIVE ──────────────────────────────────────────── */
+/* ─── HAMBURGER MENU ──────────────────────────────────────── */
+.nav-hamburger{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  cursor:pointer;padding:6px;background:none;border:none;
+}
+.nav-hamburger span{
+  display:block;width:22px;height:2px;
+  background:var(--white);border-radius:2px;transition:all .25s;
+}
+.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-mobile-menu{
+  display:none;position:fixed;
+  top:56px;left:0;right:0;
+  background:rgba(8,11,16,.97);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  z-index:99;padding:1.25rem 1.5rem;
+  flex-direction:column;gap:.25rem;
+}
+.nav-mobile-menu.open{display:flex}
+.nav-mobile-menu a{
+  color:var(--muted2);font-size:1rem;text-decoration:none;
+  font-family:"Syne",sans-serif;font-weight:600;
+  padding:.85rem .5rem;border-bottom:1px solid var(--border);
+  transition:color .2s;
+}
+.nav-mobile-menu a:last-child{border-bottom:none}
+.nav-mobile-menu a:hover,
+.nav-mobile-menu a:active{color:var(--white)}
+.nav-mobile-menu a.nl-accent{color:var(--accent-h)}
+.nav-mobile-cta{
+  display:block;margin-top:.75rem;
+  background:var(--accent);color:#fff;text-align:center;
+  padding:.75rem;border-radius:6px;
+  font-family:"Syne",sans-serif;font-weight:700;font-size:.9rem;
+  text-decoration:none;
+}
+
+/* ─── RESPONSIVE 768px ────────────────────────────────────── */
 @media(max-width:768px){
-  nav{padding:1rem 1.5rem}.nav-links{display:none}
-  section,.hero{padding:4rem 1.5rem}
-  .calc-layout,.about-inner,.contact-inner{grid-template-columns:1fr}
-  .calc-widget{position:static}
-  .hero-stats{gap:1.5rem}
+  nav{padding:.9rem 1.25rem}
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .nav-hamburger{display:flex}
+  section{padding:3.5rem 1.25rem}
+  .hero{padding:5.5rem 1.25rem 3.5rem}
+  h1.hero-title{font-size:2.6rem;letter-spacing:-1.5px}
+  .hero-sub{font-size:1rem}
+  .hero-actions{flex-direction:column;align-items:stretch;gap:.75rem}
+  .btn-primary{text-align:center;display:block}
+  .btn-secondary{justify-content:center}
+  .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2.5rem}
   .hero-stat{border:none;margin:0;padding:0}
-  footer{padding:1.5rem;flex-direction:column;text-align:center}
-  .segment-tabs{width:100%}.seg-tab{flex:1;justify-content:center}
-  .factibilidad-banner{flex-direction:column;text-align:center}
-  .expat-checklist{padding:1.5rem}
-  .expat-cta-box{flex-direction:column;text-align:center}
+  .stat-num{font-size:1.7rem}
+  .section-title{font-size:1.85rem;letter-spacing:-.5px}
+  .section-sub{font-size:1rem}
+  .factibilidad-banner{flex-direction:column;text-align:center;gap:1rem;padding:1.5rem}
+  .fact-cta{width:100%;text-align:center;display:block}
+  .segment-tabs{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .segment-tabs::-webkit-scrollbar{display:none}
+  .seg-tab{flex-shrink:0;padding:.6rem .9rem;font-size:.78rem}
+  .services-grid{grid-template-columns:1fr}
+  .service-card{padding:1.5rem}
+  .calc-layout{grid-template-columns:1fr;gap:2rem}
+  .calc-widget{position:static}
+  .pricing-grid{grid-template-columns:1fr}
+  .expat-cards{grid-template-columns:1fr}
+  .expat-card{padding:1.5rem}
+  .expat-checklist{padding:1.5rem 1.25rem}
+  .expat-steps{grid-template-columns:1fr}
+  .expat-cta-box{flex-direction:column;text-align:center;gap:1.25rem;padding:1.5rem}
+  .expat-cta-btn{width:100%;text-align:center;display:block}
+  .cta-confirms{justify-content:center}
+  .about-inner{grid-template-columns:1fr;gap:2.5rem}
+  .about-visual{height:260px}
+  .testimonials-grid{grid-template-columns:1fr}
+  .contact-inner{grid-template-columns:1fr;gap:2rem}
+  footer{padding:1.5rem;flex-direction:column;text-align:center;gap:.5rem}
+}
+
+/* ─── RESPONSIVE 480px (teléfonos pequeños) ──────────────── */
+@media(max-width:480px){
+  section{padding:2.75rem 1rem}
+  .hero{padding:5rem 1rem 2.75rem}
+  h1.hero-title{font-size:2.1rem;letter-spacing:-1px}
+  .hero-sub{font-size:.95rem}
+  .stat-num{font-size:1.5rem}
+  .section-title{font-size:1.6rem}
+  .service-card{padding:1.25rem}
+  .expat-card{padding:1.25rem}
+  .hero-stats{gap:1rem}
+  .expat-checklist h3{font-size:1.15rem}
+  .pricing-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -616,7 +697,19 @@ footer p{font-size:.76rem;color:var(--muted)}
     <a href="#contacto">Contacto</a>
   </div>
   <a href="#contacto" class="nav-cta">Estudio gratuito</a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <a href="#servicios">Servicios</a>
+  <a href="#expats" class="nl-accent">&#127758; Expats &amp; Foreigners</a>
+  <a href="#calculadora">Calculadora</a>
+  <a href="#precios">Precios</a>
+  <a href="#nosotros">Nosotros</a>
+  <a href="#contacto">Contacto</a>
+  <a href="#contacto" class="nav-mobile-cta">Estudio gratuito →</a>
+</div>
 
 <!-- ── HERO ───────────────────────────────────────────────── -->
 <section class="hero">
@@ -1111,6 +1204,21 @@ footer p{font-size:.76rem;color:var(--muted)}
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
+  // Hamburger menu
+  var hamburger = document.getElementById("nav-hamburger");
+  var mobileMenu = document.getElementById("nav-mobile-menu");
+  hamburger.addEventListener("click", function(){
+    hamburger.classList.toggle("open");
+    mobileMenu.classList.toggle("open");
+  });
+  // Cerrar menú al hacer clic en un link
+  mobileMenu.querySelectorAll("a").forEach(function(link){
+    link.addEventListener("click", function(){
+      hamburger.classList.remove("open");
+      mobileMenu.classList.remove("open");
+    });
+  });
+
   // Segment tabs
   ["pyme","pf","expat"].forEach(function(seg){
     document.getElementById("tab-"+seg).addEventListener("click", function(){ switchTab(seg); });
