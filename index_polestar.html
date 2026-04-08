@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>EnkelSumma — Automatización Inteligente · Asesoría Fiscal · México &amp; LATAM</title>
+<meta name="description" content="Automatizamos tus procesos con IA y ofrecemos consultoría fiscal bilingüe para PYMES, freelancers y expats en México y LATAM.">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS — POLESTAR-INSPIRED ─────────────────── */
+:root{
+  --white:    #FFFFFF;
+  --off:      #F7F7F7;
+  --off2:     #F0F0F0;
+  --ink:      #111111;
+  --ink2:     #333333;
+  --muted:    #767676;
+  --muted2:   #AAAAAA;
+  --border:   #E5E5E5;
+  --border2:  #D0D0D0;
+  --gold:     #C9A227;
+  --gold-l:   rgba(201,162,39,.08);
+  --green:    #1A7A4A;
+  --red:      #C0392B;
+  --section-pad: clamp(4rem,8vw,8rem);
+  --page-pad:    clamp(1.25rem,5vw,5rem);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  background:var(--white);color:var(--ink);
+  font-family:"DM Sans",sans-serif;
+  font-size:clamp(17px,1.35vw,20px);
+  line-height:1.75;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+h1,h2,h3,h4,h5{font-family:"Space Grotesk",sans-serif;color:var(--ink);line-height:1.08}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+button{font-family:inherit;cursor:pointer;border:none;background:none;touch-action:manipulation}
+/* prevent iOS zoom on input focus */
+input,select,textarea{font-size:max(16px,1em)}
+
+/* LANG */
+.en{display:none}
+body.lang-en .es{display:none}
+body.lang-en .en{display:revert}
+
+/* ─── NAV ────────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--page-pad);
+  padding-left:max(var(--page-pad), env(safe-area-inset-left));
+  padding-right:max(var(--page-pad), env(safe-area-inset-right));
+  height:68px;
+  background:rgba(255,255,255,.97);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:"Space Grotesk",sans-serif;font-size:1.2rem;font-weight:700;letter-spacing:-.3px;color:var(--ink)}
+.nav-logo em{font-style:normal;color:var(--gold)}
+.nav-center{display:flex;gap:2rem;align-items:center}
+.nav-center a{font-size:.88rem;font-weight:500;color:var(--muted);letter-spacing:.3px;transition:color .2s}
+.nav-center a:hover{color:var(--ink)}
+.nav-center a.hi{color:var(--ink);font-weight:600}
+.nav-right{display:flex;align-items:center;gap:.9rem}
+.lang-sw{display:flex;border:1px solid var(--border2);border-radius:4px;overflow:hidden;font-family:"Space Grotesk",sans-serif}
+.lang-sw button{padding:.32rem .72rem;font-size:.78rem;font-weight:600;color:var(--muted);letter-spacing:.5px;transition:all .15s;min-height:36px}
+.lang-sw button.on{background:var(--ink);color:var(--white)}
+.nav-cta{background:var(--ink);color:var(--white);padding:.5rem 1.3rem;border-radius:3px;font-family:"Space Grotesk",sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.3px;transition:opacity .2s;min-height:40px;display:inline-flex;align-items:center}
+.nav-cta:hover{opacity:.8}
+.ham{display:none;flex-direction:column;gap:5px;padding:10px;cursor:pointer;min-width:44px;min-height:44px;align-items:center;justify-content:center}
+.ham span{display:block;width:22px;height:2px;background:var(--ink);transition:all .3s}
+.ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.ham.open span:nth-child(2){opacity:0}
+.ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mob-menu{
+  display:none;position:fixed;top:68px;left:0;right:0;bottom:0;
+  background:var(--white);z-index:199;
+  flex-direction:column;
+  padding:2rem var(--page-pad);
+  padding-bottom:max(2rem, env(safe-area-inset-bottom));
+  gap:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
+}
+.mob-menu.open{display:flex}
+.mob-menu a{font-size:1.35rem;font-weight:600;color:var(--ink);padding:.85rem 0;border-bottom:1px solid var(--border);min-height:56px;display:flex;align-items:center}
+.mob-cta{
+  display:flex;align-items:center;justify-content:center;
+  margin-top:1.5rem;background:var(--ink);color:var(--white);text-align:center;
+  padding:1rem;border-radius:3px;
+  font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:1rem;
+  min-height:54px;
+}
+.mob-lang{display:flex;gap:.5rem;margin-top:auto;padding-top:1.5rem;border-top:1px solid var(--border)}
+.mob-lang button{padding:.55rem 1.25rem;border:1px solid var(--border2);border-radius:4px;font-size:.85rem;font-weight:600;font-family:"Space Grotesk",sans-serif;transition:all .15s;min-height:44px}
+.mob-lang button.on{background:var(--ink);color:var(--white);border-color:var(--ink)}
+
+/* ─── HERO ───────────────────────────────────────── */
+.hero{
+  min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  padding:calc(68px + 5rem) var(--page-pad) 5rem;
+  padding-left:max(var(--page-pad), env(safe-area-inset-left));
+  padding-right:max(var(--page-pad), env(safe-area-inset-right));
+  border-bottom:1px solid var(--border);
+}
+.hero-flag{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-size:.78rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:3rem;
+}
+.hero-flag-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0}
+/* POLESTAR-SCALE hero title */
+.hero-title{
+  font-size:clamp(3.2rem,9vw,8rem);
+  font-weight:700;letter-spacing:-.04em;
+  max-width:960px;margin-bottom:2rem;line-height:.98;
+}
+.hero-title em{font-style:normal;color:var(--gold)}
+.hero-sub{
+  font-size:clamp(1.05rem,1.6vw,1.25rem);
+  color:var(--muted);max-width:560px;line-height:1.85;margin-bottom:3rem;
+}
+.hero-actions{display:flex;gap:1.1rem;align-items:center;flex-wrap:wrap}
+.btn-dark{
+  background:var(--ink);color:var(--white);
+  padding:.9rem 2rem;border-radius:3px;
+  font-family:"Space Grotesk",sans-serif;font-size:.95rem;font-weight:600;letter-spacing:.3px;
+  transition:opacity .2s;display:inline-flex;align-items:center;min-height:52px;
+}
+.btn-dark:hover{opacity:.8}
+.btn-ghost{
+  color:var(--ink);border:1px solid var(--border2);
+  padding:.9rem 2rem;border-radius:3px;
+  font-family:"Space Grotesk",sans-serif;font-size:.95rem;font-weight:600;letter-spacing:.3px;
+  transition:all .2s;display:inline-flex;align-items:center;min-height:52px;
+}
+.btn-ghost:hover{border-color:var(--ink)}
+.hero-kpi{display:flex;gap:0;margin-top:4.5rem;padding-top:3rem;border-top:1px solid var(--border);flex-wrap:wrap;gap:0}
+.kpi{padding-right:3rem;margin-right:3rem;border-right:1px solid var(--border)}
+.kpi:last-child{border:none;margin:0;padding:0}
+.kpi-val{font-family:"Space Grotesk",sans-serif;font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:700;color:var(--ink)}
+.kpi-val .g{color:var(--gold)}
+.kpi-label{font-size:.82rem;color:var(--muted);letter-spacing:.3px;margin-top:4px}
+
+/* ─── SECTIONS ───────────────────────────────────── */
+section{
+  padding:var(--section-pad) var(--page-pad);
+  padding-left:max(var(--page-pad), env(safe-area-inset-left));
+  padding-right:max(var(--page-pad), env(safe-area-inset-right));
+}
+.sec-label{font-size:.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:1.1rem}
+.sec-title{font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:700;letter-spacing:-.03em;margin-bottom:1.25rem;line-height:1.05}
+.sec-sub{font-size:clamp(1rem,1.4vw,1.15rem);color:var(--muted);max-width:560px;line-height:1.85}
+
+/* ─── PROFILES ───────────────────────────────────── */
+.profiles{background:var(--off);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.profiles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:3.5rem;background:var(--border);border:1px solid var(--border)}
+.pcard{background:var(--white);padding:2.5rem 2rem;transition:background .2s;position:relative}
+.pcard:hover{background:#FAFAFA}
+.pcard.hi{background:var(--ink)}
+.pcard.hi:hover{background:#1A1A1A}
+.pcard-icon{font-size:1.5rem;margin-bottom:1.75rem}
+.pcard-tag{font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.pcard-name{font-family:"Space Grotesk",sans-serif;font-size:1.45rem;font-weight:700;color:var(--ink);margin-bottom:.75rem}
+.pcard.hi .pcard-name{color:var(--white)}
+.pcard-desc{font-size:1rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem}
+.pcard.hi .pcard-desc{color:rgba(255,255,255,.6)}
+.pcard-chips{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.5rem}
+.chip{font-size:.72rem;padding:4px 10px;border:1px solid var(--border2);border-radius:2px;color:var(--muted);background:var(--off);font-family:"Space Grotesk",sans-serif;font-weight:500;letter-spacing:.2px}
+.pcard.hi .chip{border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.5);background:rgba(255,255,255,.06)}
+.pcard-list{display:flex;flex-direction:column;gap:.55rem;margin-bottom:2rem}
+.pcard-li{display:flex;gap:.6rem;font-size:.97rem;color:var(--muted)}
+.pcard.hi .pcard-li{color:rgba(255,255,255,.6)}
+.pcard-li::before{content:"—";color:var(--gold);font-weight:700;flex-shrink:0}
+.pcard-link{display:inline-flex;align-items:center;gap:.4rem;font-family:"Space Grotesk",sans-serif;font-size:.88rem;font-weight:600;color:var(--ink);letter-spacing:.3px;transition:gap .2s}
+.pcard.hi .pcard-link{color:var(--gold)}
+.pcard-link:hover{gap:.7rem}
+
+/* ─── FACTS ──────────────────────────────────────── */
+.facts{background:var(--white)}
+.facts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:3.5rem;background:var(--border);border:1px solid var(--border)}
+.fact{background:var(--white);padding:2rem 1.75rem;transition:background .2s}
+.fact:hover{background:var(--off)}
+.fact-n{font-size:.7rem;font-weight:700;letter-spacing:2.5px;color:var(--muted2);text-transform:uppercase;margin-bottom:.75rem}
+.fact-icon{font-size:1.5rem;margin-bottom:1rem}
+.fact-title{font-family:"Space Grotesk",sans-serif;font-size:1.15rem;font-weight:700;color:var(--ink);margin-bottom:.7rem;line-height:1.25}
+.fact-text{font-size:.97rem;color:var(--muted);line-height:1.8}
+.fact-badge{display:inline-block;margin-top:.9rem;font-size:.7rem;padding:3px 10px;border-radius:2px;border:1px solid var(--border2);color:var(--muted);font-family:"Space Grotesk",sans-serif;font-weight:600;letter-spacing:.3px}
+
+/* ─── HOW IT WORKS ───────────────────────────────── */
+.how{background:var(--off);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.how-inner{display:grid;grid-template-columns:1fr 1.05fr;gap:5rem;align-items:start}
+.steps{margin-top:2.5rem}
+.step{display:grid;grid-template-columns:40px 1fr;gap:1.25rem;padding:1.5rem 0;border-bottom:1px solid var(--border)}
+.step:last-child{border:none}
+.step-n{font-family:"Space Grotesk",sans-serif;font-size:.8rem;font-weight:700;color:var(--muted2);padding-top:3px;letter-spacing:.5px}
+.step-title{font-family:"Space Grotesk",sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.4rem}
+.step-text{font-size:.97rem;color:var(--muted);line-height:1.8}
+.step-tag{font-size:.78rem;color:var(--gold);font-weight:600;margin-top:.4rem;letter-spacing:.2px}
+.how-aside{position:sticky;top:84px;margin-top:2.5rem}
+.aside-card{background:var(--white);border:1px solid var(--border);padding:0;overflow:hidden}
+.aside-head{background:var(--ink);padding:1.25rem 1.5rem;display:flex;justify-content:space-between;align-items:center}
+.aside-head-title{font-family:"Space Grotesk",sans-serif;font-size:.87rem;font-weight:600;color:var(--white);letter-spacing:.2px}
+.aside-head-sub{font-size:.72rem;color:rgba(255,255,255,.5);margin-top:2px}
+.aside-body{padding:1.25rem 1.5rem}
+.aside-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:.83rem}
+.aside-row:last-child{border:none}
+.aside-label{color:var(--muted)}
+.aside-val{font-weight:600;color:var(--ink);font-family:"Space Grotesk",sans-serif}
+.aside-val.g{color:var(--green)}
+.aside-val.r{color:var(--red)}
+.aside-total{background:var(--off);padding:.85rem 1rem;margin-top:.75rem;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border)}
+.aside-total-label{font-size:.75rem;font-weight:700;font-family:"Space Grotesk",sans-serif}
+.aside-total-val{font-size:1.05rem;font-weight:700;font-family:"Space Grotesk",sans-serif}
+.aside-note{font-size:.72rem;color:var(--muted);line-height:1.65;margin-top:.75rem;padding:.65rem .85rem;border-left:2px solid var(--gold);background:var(--gold-l)}
+
+/* ─── SERVICES (TABS) ────────────────────────────── */
+.services{background:var(--white);border-top:1px solid var(--border)}
+.seg-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:3rem;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.seg-tabs::-webkit-scrollbar{display:none}
+.stab{padding:.9rem 1.75rem;font-family:"Space Grotesk",sans-serif;font-size:.88rem;font-weight:600;letter-spacing:.3px;color:var(--muted);border-bottom:2px solid transparent;transition:all .2s;margin-bottom:-1px;flex-shrink:0;cursor:pointer;min-height:48px}
+.stab.on{color:var(--ink);border-bottom-color:var(--ink)}
+.stab:hover:not(.on){color:var(--ink2)}
+.spanel{display:none}
+.spanel.on{display:block}
+.seg-intro{padding:1.5rem 2rem;background:var(--off);border:1px solid var(--border);margin-bottom:2rem}
+.seg-intro-title{font-family:"Space Grotesk",sans-serif;font-size:1.15rem;font-weight:700;margin-bottom:.4rem}
+.seg-intro-desc{font-size:1rem;color:var(--muted);line-height:1.8;margin-bottom:.75rem}
+.seg-chips{display:flex;flex-wrap:wrap;gap:.35rem}
+.svcs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--border);border:1px solid var(--border)}
+.svc{background:var(--white);padding:2rem;transition:background .2s;position:relative;overflow:hidden}
+.svc:hover{background:var(--off)}
+.svc::before{content:"";position:absolute;top:0;left:0;bottom:0;width:2px;background:var(--gold);opacity:0;transition:opacity .2s}
+.svc:hover::before{opacity:1}
+.svc-num{font-size:.68rem;font-weight:700;letter-spacing:2.5px;color:var(--muted2);margin-bottom:1.25rem;text-transform:uppercase}
+.svc-icon{font-size:1.35rem;margin-bottom:1rem}
+.svc-title{font-family:"Space Grotesk",sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.5rem;line-height:1.3}
+.svc-desc{font-size:.97rem;color:var(--muted);line-height:1.8}
+.svc-tag{display:inline-block;margin-top:.85rem;font-size:.68rem;padding:3px 9px;border:1px solid var(--border2);border-radius:2px;color:var(--muted);font-family:"Space Grotesk",sans-serif;font-weight:600;letter-spacing:.3px}
+
+/* ─── EXPATS ─────────────────────────────────────── */
+.expats{background:var(--off);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.expats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:3rem;background:var(--border);border:1px solid var(--border)}
+.ecard{background:var(--white);padding:2rem 1.75rem;transition:background .2s}
+.ecard:hover{background:#FAFAFA}
+.ecard-icon{font-size:1.25rem;margin-bottom:1rem}
+.ecard-title{font-family:"Space Grotesk",sans-serif;font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:.6rem;line-height:1.3}
+.ecard-desc{font-size:.97rem;color:var(--muted);line-height:1.8}
+.ecard-legal{display:inline-block;margin-top:.85rem;font-size:.68rem;padding:3px 9px;border:1px solid var(--border2);border-radius:2px;color:var(--muted);font-family:"Space Grotesk",sans-serif;font-weight:600;letter-spacing:.3px}
+.expat-checklist{margin-top:3rem;padding:2.5rem;border:1px solid var(--border);background:var(--white)}
+.expat-checklist-title{font-family:"Space Grotesk",sans-serif;font-size:1.45rem;font-weight:700;margin-bottom:.4rem}
+.expat-checklist-sub{font-size:1rem;color:var(--muted);margin-bottom:2rem;line-height:1.8}
+.expat-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--border);border:1px solid var(--border)}
+.estep{background:var(--white);padding:1.5rem;display:flex;gap:.85rem;align-items:flex-start;transition:background .2s}
+.estep:hover{background:var(--off)}
+.estep-n{width:32px;height:32px;background:var(--ink);color:var(--white);display:flex;align-items:center;justify-content:center;font-family:"Space Grotesk",sans-serif;font-size:.75rem;font-weight:700;flex-shrink:0;margin-top:1px}
+.estep-title{font-family:"Space Grotesk",sans-serif;font-size:1rem;font-weight:700;margin-bottom:.3rem}
+.estep-text{font-size:.92rem;color:var(--muted);line-height:1.75}
+.expat-cta{margin-top:2.5rem;padding:2rem 2.5rem;background:var(--ink);display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.expat-cta-text h3{font-family:"Space Grotesk",sans-serif;font-size:1.2rem;font-weight:700;color:var(--white);margin-bottom:.35rem}
+.expat-cta-text p{font-size:.97rem;color:rgba(255,255,255,.6);line-height:1.7}
+.expat-cta-confirms{display:flex;gap:1.25rem;flex-wrap:wrap;margin-top:.5rem;font-size:.82rem;color:rgba(255,255,255,.5)}
+.expat-cta-confirms span::before{content:"✓ ";color:var(--gold)}
+
+/* ─── CALCULATOR ─────────────────────────────────── */
+.calc{background:var(--white);border-top:1px solid var(--border)}
+.calc-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.calc-left{}
+.calc-example{background:var(--off);border:1px solid var(--border);padding:1.75rem;margin-bottom:1.75rem}
+.calc-example-title{font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.calc-profile{display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem}
+.calc-avatar{width:36px;height:36px;background:var(--ink);color:var(--white);display:flex;align-items:center;justify-content:center;font-family:"Space Grotesk",sans-serif;font-size:.75rem;font-weight:700;flex-shrink:0}
+.calc-name{font-family:"Space Grotesk",sans-serif;font-size:.9rem;font-weight:700}
+.calc-role{font-size:.78rem;color:var(--muted)}
+.calc-row{display:flex;justify-content:space-between;padding:.35rem 0;border-bottom:1px solid var(--border);font-size:.82rem}
+.calc-row:last-child{border:none}
+.calc-row-label{color:var(--muted)}
+.calc-row-val{font-weight:600;font-family:"Space Grotesk",sans-serif}
+.calc-row-val.r{color:var(--red)}
+.calc-row-val.g{color:var(--green)}
+.calc-row-val.a{color:var(--gold)}
+.calc-note{margin-top:.9rem;padding:.65rem .85rem;border-left:2px solid var(--gold);background:var(--gold-l);font-size:.78rem;color:var(--muted);line-height:1.6;font-style:italic}
+.calc-widget{background:var(--off);border:1px solid var(--border);padding:2rem;position:sticky;top:84px}
+.calc-widget-title{font-family:"Space Grotesk",sans-serif;font-size:1.15rem;font-weight:700;margin-bottom:.25rem}
+.calc-widget-sub{font-size:.9rem;color:var(--muted);margin-bottom:1.75rem}
+.slider-group{margin-bottom:1.25rem}
+.slider-top{display:flex;justify-content:space-between;margin-bottom:.4rem}
+.slider-label{font-size:.88rem;color:var(--muted)}
+.slider-val{font-size:.9rem;font-weight:600;color:var(--ink);font-family:"Space Grotesk",sans-serif}
+input[type=range]{width:100%;accent-color:var(--ink);height:3px;cursor:pointer;touch-action:manipulation}
+.calc-result{background:var(--white);border:1px solid var(--border);padding:1.5rem;margin-top:1.5rem}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-bottom:1.25rem;background:var(--border);border:1px solid var(--border)}
+.result-item{text-align:center;padding:.9rem;background:var(--white)}
+.result-num{font-family:"Space Grotesk",sans-serif;font-size:1.4rem;font-weight:700}
+.result-num.r{color:var(--red)}
+.result-num.g{color:var(--green)}
+.result-num.a{color:var(--gold)}
+.result-lbl{font-size:.75rem;color:var(--muted);margin-top:2px;line-height:1.3}
+.result-phrase{padding:.75rem 1rem;border-left:2px solid var(--border2);font-size:.85rem;color:var(--muted);line-height:1.6;font-style:italic;margin-bottom:1rem}
+
+/* ─── PRICING ────────────────────────────────────── */
+.pricing{background:var(--off);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:3rem;background:var(--border);border:1px solid var(--border)}
+.prc{background:var(--white);padding:2rem 1.75rem;position:relative;transition:background .2s}
+.prc:hover{background:#FAFAFA}
+.prc.feat{background:var(--ink)}
+.prc.feat:hover{background:#1A1A1A}
+.prc-seg{font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem}
+.prc.feat .prc-seg{color:rgba(201,162,39,.9)}
+.prc-name{font-family:"Space Grotesk",sans-serif;font-size:1.2rem;font-weight:700;color:var(--ink);margin-bottom:1.25rem}
+.prc.feat .prc-name{color:var(--white)}
+.prc-amount{display:flex;align-items:baseline;gap:.3rem;margin-bottom:.3rem}
+.prc-currency{font-size:.9rem;font-weight:600;color:var(--muted);font-family:"Space Grotesk",sans-serif}
+.prc.feat .prc-currency{color:rgba(255,255,255,.5)}
+.prc-val{font-family:"Space Grotesk",sans-serif;font-size:2.8rem;font-weight:700;color:var(--ink);line-height:1}
+.prc.feat .prc-val{color:var(--white)}
+.prc-period{font-size:.88rem;color:var(--muted);margin-bottom:.35rem}
+.prc.feat .prc-period{color:rgba(255,255,255,.5)}
+.prc-usd{font-size:.78rem;color:var(--muted2);margin-bottom:1.5rem}
+.prc.feat .prc-usd{color:rgba(255,255,255,.35)}
+.prc-divider{height:1px;background:var(--border);margin:1.25rem 0}
+.prc.feat .prc-divider{background:rgba(255,255,255,.12)}
+.prc-items{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.5rem}
+.prc-item{display:flex;gap:.6rem;font-size:.93rem;color:var(--muted)}
+.prc.feat .prc-item{color:rgba(255,255,255,.6)}
+.prc-item::before{content:"—";color:var(--gold);font-weight:700;flex-shrink:0}
+.prc.feat .prc-item::before{color:var(--gold)}
+.prc-note{font-size:.75rem;color:var(--muted);margin-bottom:1.25rem;padding:.5rem .75rem;border-left:2px solid var(--gold);background:var(--gold-l)}
+.prc.feat .prc-note{background:rgba(201,162,39,.08);color:rgba(255,255,255,.5)}
+.prc-cta{display:block;text-align:center;padding:.85rem;font-family:"Space Grotesk",sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.3px;transition:all .2s;border:1px solid var(--border2);color:var(--ink);min-height:48px}
+.prc-cta:hover{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.prc.feat .prc-cta{background:var(--white);color:var(--ink);border-color:var(--white)}
+.prc.feat .prc-cta:hover{opacity:.88}
+.prc-benchmark{margin-top:2rem;padding:1.25rem 1.5rem;border:1px solid var(--border);background:var(--white);font-size:.82rem}
+.prc-benchmark-title{font-family:"Space Grotesk",sans-serif;font-size:.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem}
+
+/* ─── ABOUT ──────────────────────────────────────── */
+.about{background:var(--white)}
+.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.about-list{display:flex;flex-direction:column;gap:.55rem;margin-top:1.75rem}
+.about-li{display:flex;gap:.6rem;font-size:.97rem;color:var(--muted);line-height:1.7}
+.about-li::before{content:"—";color:var(--gold);font-weight:700;flex-shrink:0;margin-top:2px}
+.about-visual{background:var(--off);border:1px solid var(--border);padding:2rem;margin-top:2.5rem}
+.flow-step-item{display:flex;align-items:center;gap:1rem;padding:.85rem 0;border-bottom:1px solid var(--border)}
+.flow-step-item:last-child{border:none}
+.flow-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.flow-text{font-size:.97rem;color:var(--muted)}
+.flow-arrow-item{padding:.25rem 0 .25rem 1.5rem;font-size:.8rem;color:var(--muted2)}
+
+/* ─── CONTACT ────────────────────────────────────── */
+.contact{background:var(--off);border-top:1px solid var(--border)}
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.contact-info{margin-top:2rem;display:flex;flex-direction:column;gap:1rem}
+.contact-item{display:flex;gap:.75rem;align-items:flex-start}
+.contact-icon{font-size:1rem;margin-top:2px;flex-shrink:0}
+.contact-item-label{font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem}
+.contact-item-value{font-size:1rem;color:var(--ink2)}
+.contact-form{display:flex;flex-direction:column;gap:1rem}
+.form-group{display:flex;flex-direction:column;gap:.35rem}
+.form-group label{font-size:.78rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);font-family:"Space Grotesk",sans-serif}
+.form-group input,.form-group select,.form-group textarea{
+  padding:.85rem 1rem;border:1px solid var(--border2);background:var(--white);
+  font-family:"DM Sans",sans-serif;font-size:max(16px,1rem);color:var(--ink);
+  border-radius:2px;transition:border-color .2s;outline:none;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--ink)}
+.form-group textarea{resize:vertical;min-height:100px}
+.form-submit{background:var(--ink);color:var(--white);padding:.95rem;font-family:"Space Grotesk",sans-serif;font-size:.95rem;font-weight:600;letter-spacing:.3px;border:none;cursor:pointer;transition:opacity .2s;border-radius:2px;margin-top:.25rem;min-height:52px;touch-action:manipulation}
+.form-submit:hover{opacity:.82}
+.contact-lang-note{margin-top:1.5rem;padding:.75rem 1rem;border-left:2px solid var(--gold);background:var(--gold-l);font-size:.9rem;color:var(--muted);line-height:1.6}
+
+/* ─── FOOTER ─────────────────────────────────────── */
+footer{
+  padding:1.75rem var(--page-pad);
+  padding-left:max(var(--page-pad), env(safe-area-inset-left));
+  padding-right:max(var(--page-pad), env(safe-area-inset-right));
+  padding-bottom:max(1.75rem, env(safe-area-inset-bottom));
+  background:var(--ink);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;border-top:1px solid rgba(255,255,255,.08)
+}
+.footer-logo{font-family:"Space Grotesk",sans-serif;font-size:1.1rem;font-weight:700;color:var(--white)}
+.footer-logo em{font-style:normal;color:var(--gold)}
+footer p{font-size:.82rem;color:rgba(255,255,255,.4)}
+
+/* ─── RESPONSIVE ─────────────────────────────────── */
+
+/* Large tablet — 2-col grids collapse */
+@media(max-width:1100px){
+  .pricing-grid{grid-template-columns:repeat(2,1fr)}
+  .expats-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* Tablet portrait — single-column layouts */
+@media(max-width:960px){
+  .how-inner{grid-template-columns:1fr;gap:2.5rem}
+  .how-aside{position:static}
+  .calc-inner{grid-template-columns:1fr;gap:2rem}
+  .calc-widget{position:static}
+  .about-inner{grid-template-columns:1fr;gap:2.5rem}
+  .contact-inner{grid-template-columns:1fr;gap:2.5rem}
+  .prc-val{font-size:2.4rem}
+}
+
+/* Mobile — nav collapses, most grids go 1-col */
+@media(max-width:700px){
+  .nav-center{display:none}
+  .nav-right .lang-sw{display:none}
+  .nav-cta{display:none}
+  .ham{display:flex}
+
+  /* grids */
+  .profiles-grid{grid-template-columns:1fr}
+  .facts-grid{grid-template-columns:1fr}
+  .expats-grid{grid-template-columns:1fr}
+  .pricing-grid{grid-template-columns:1fr}
+
+  /* hero */
+  .hero{
+    padding:calc(68px + 2.5rem) var(--page-pad) 3rem;
+    padding-left:max(var(--page-pad), env(safe-area-inset-left));
+    padding-right:max(var(--page-pad), env(safe-area-inset-right));
+  }
+  .hero-title{font-size:clamp(2.6rem,10vw,4.5rem)}
+  .hero-sub{font-size:1.05rem}
+  .hero-kpi{gap:1.5rem;padding-top:2rem;margin-top:2.5rem;flex-wrap:wrap}
+  .kpi{border:none;margin:0;padding:0;min-width:calc(50% - .75rem)}
+
+  /* sections */
+  section{
+    padding:3rem var(--page-pad);
+    padding-left:max(var(--page-pad), env(safe-area-inset-left));
+    padding-right:max(var(--page-pad), env(safe-area-inset-right));
+  }
+  .sec-title{font-size:clamp(1.9rem,7vw,2.6rem)}
+
+  /* buttons full-width on mobile */
+  .hero-actions{flex-direction:column;align-items:stretch}
+  .btn-dark,.btn-ghost{justify-content:center;min-height:56px;font-size:1rem}
+
+  /* profiles */
+  .pcard{padding:2rem 1.5rem}
+
+  /* services tabs scrollable */
+  .seg-tabs{gap:0}
+  .stab{padding:.85rem 1.25rem;font-size:.85rem}
+
+  /* expats */
+  .expat-cta{flex-direction:column;text-align:center;padding:1.75rem}
+  .expat-cta-confirms{justify-content:center}
+  .expat-checklist{padding:1.75rem}
+
+  /* calculator */
+  .calc-widget{padding:1.5rem}
+
+  /* pricing — stack cleanly */
+  .prc{padding:1.75rem 1.5rem}
+  .prc-val{font-size:2.6rem}
+
+  /* contact */
+  .contact-info{gap:.85rem}
+}
+
+/* Small phone — 375px and below */
+@media(max-width:480px){
+  .hero-title{font-size:clamp(2.2rem,9.5vw,3rem)}
+  .sec-title{font-size:clamp(1.75rem,7vw,2.2rem)}
+  section{padding:2.5rem var(--page-pad)}
+  .expat-checklist-sub{display:none}
+  .result-grid{grid-template-columns:1fr}
+  .hero-kpi{flex-direction:column;gap:1.25rem}
+  .kpi{min-width:auto}
+  /* pricing list readable */
+  .prc-item{font-size:.9rem}
+}
+
+/* Touch devices — enforce minimum tap targets */
+@media(hover:none){
+  .btn-dark,.btn-ghost,.nav-cta,.prc-cta,.form-submit,
+  .stab,.pcard-link,.mob-menu a,.mob-lang button{min-height:44px}
+  .prc-cta{min-height:52px}
+  .form-submit{min-height:56px}
+  /* remove hover effects that feel "sticky" on touch */
+  .pcard:hover,.fact:hover,.svc:hover,.ecard:hover,.estep:hover,.prc:hover{background:revert}
+  .svc:hover::before{opacity:0}
+}
+
+/* iOS safe-area for devices with notch / home bar */
+@supports(padding:env(safe-area-inset-bottom)){
+  footer{padding-bottom:max(1.75rem, env(safe-area-inset-bottom))}
+  .mob-menu{padding-bottom:max(3rem, env(safe-area-inset-bottom))}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Enkel<em>.</em>Summa</div>
+  <div class="nav-center">
+    <a href="#servicios"><span class="es">Servicios</span><span class="en">Services</span></a>
+    <a href="#expats" class="hi">🌎 Expats</a>
+    <a href="#calculadora"><span class="es">Calculadora</span><span class="en">Calculator</span></a>
+    <a href="#precios"><span class="es">Precios</span><span class="en">Pricing</span></a>
+    <a href="#nosotros"><span class="es">Nosotros</span><span class="en">About</span></a>
+    <a href="#contacto"><span class="es">Contacto</span><span class="en">Contact</span></a>
+  </div>
+  <div class="nav-right">
+    <div class="lang-sw">
+      <button id="btn-es" class="on" onclick="setLang('es')">ES</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="#contacto" class="nav-cta"><span class="es">Estudio gratuito</span><span class="en">Free Consult</span></a>
+    <button class="ham" id="ham" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mob-menu" id="mob-menu">
+  <a href="#servicios"><span class="es">Servicios</span><span class="en">Services</span></a>
+  <a href="#expats">🌎 Expats &amp; Foreigners</a>
+  <a href="#calculadora"><span class="es">Calculadora</span><span class="en">Calculator</span></a>
+  <a href="#precios"><span class="es">Precios</span><span class="en">Pricing</span></a>
+  <a href="#nosotros"><span class="es">Nosotros</span><span class="en">About</span></a>
+  <a href="#contacto"><span class="es">Contacto</span><span class="en">Contact</span></a>
+  <a href="#contacto" class="mob-cta"><span class="es">Estudio gratuito →</span><span class="en">Free Consultation →</span></a>
+  <div class="mob-lang">
+    <button id="mbtn-es" class="on" onclick="setLang('es')">ES</button>
+    <button id="mbtn-en" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-flag">
+    <span class="hero-flag-dot"></span>
+    <span class="es">Automatización Inteligente · México &amp; LATAM</span>
+    <span class="en">Smart Automation · Mexico &amp; LATAM</span>
+  </div>
+  <h1 class="hero-title">
+    <span class="es">Tu negocio<br>en <em>piloto<br>automático</em></span>
+    <span class="en">Your business<br>on <em>autopilot</em></span>
+  </h1>
+  <p class="hero-sub es">Automatizamos tus procesos con IA, conectamos tus herramientas y llevamos tu contabilidad sin esfuerzo. Para PYMES, freelancers y extranjeros en México y LATAM.</p>
+  <p class="hero-sub en">We automate your workflows with AI, connect your tools, and handle your accounting effortlessly. For SMEs, freelancers, and expats across Mexico and LATAM.</p>
+  <div class="hero-actions">
+    <a href="#calculadora" class="btn-dark es">¿Cuánto estás perdiendo hoy?</a>
+    <a href="#calculadora" class="btn-dark en">Calculate your lost hours</a>
+    <a href="#servicios" class="btn-ghost es">Ver servicios →</a>
+    <a href="#servicios" class="btn-ghost en">Explore services →</a>
+  </div>
+  <div class="hero-kpi">
+    <div class="kpi">
+      <div class="kpi-val">80<span class="g">%</span></div>
+      <div class="kpi-label es">menos tareas manuales</div>
+      <div class="kpi-label en">less manual work</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">24<span class="g">/7</span></div>
+      <div class="kpi-label es">procesos funcionando</div>
+      <div class="kpi-label en">processes running</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">3</div>
+      <div class="kpi-label es">planes para cada perfil</div>
+      <div class="kpi-label en">plans for every profile</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">ES<span class="g">/</span>EN</div>
+      <div class="kpi-label es">servicio bilingüe</div>
+      <div class="kpi-label en">bilingual service</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILES -->
+<section class="profiles">
+  <div class="sec-label es">¿Para quién?</div>
+  <div class="sec-label en">Who is it for?</div>
+  <h2 class="sec-title es">Soluciones para cada tipo de negocio</h2>
+  <h2 class="sec-title en">Solutions for every business type</h2>
+  <p class="sec-sub es">Desde la PYME que quiere digitalizar hasta el expat que necesita entender el SAT — tenemos un servicio específico para ti.</p>
+  <p class="sec-sub en">From the SME digitizing operations to the expat navigating SAT — we have a service built for you.</p>
+  <div class="profiles-grid">
+    <!-- PYME -->
+    <div class="pcard">
+      <div class="pcard-icon">🏢</div>
+      <div class="pcard-tag es">EMPRESA</div>
+      <div class="pcard-tag en">BUSINESS</div>
+      <div class="pcard-name es">PYME &amp; Negocio</div>
+      <div class="pcard-name en">SME &amp; Business</div>
+      <p class="pcard-desc es">Automatizamos tus operaciones para que tu equipo deje de perder tiempo en tareas repetitivas y se enfoque en crecer.</p>
+      <p class="pcard-desc en">We automate your operations so your team stops losing time on repetitive tasks and focuses on growth.</p>
+      <div class="pcard-chips">
+        <span class="chip">Tiendas en línea</span>
+        <span class="chip">Agencias</span>
+        <span class="chip">Comercios</span>
+        <span class="chip">Distribuidoras</span>
+      </div>
+      <div class="pcard-list">
+        <div class="pcard-li es">Conexión automática entre herramientas</div>
+        <div class="pcard-li en">Automatic tool integrations</div>
+        <div class="pcard-li es">Dashboard financiero en tiempo real</div>
+        <div class="pcard-li en">Real-time financial dashboard</div>
+        <div class="pcard-li es">Conciliación bancaria automatizada</div>
+        <div class="pcard-li en">Automated bank reconciliation</div>
+        <div class="pcard-li es">Módulo contable y fiscal completo</div>
+        <div class="pcard-li en">Complete accounting &amp; tax module</div>
+      </div>
+      <a href="#servicios" class="pcard-link es">Ver servicios PYME →</a>
+      <a href="#servicios" class="pcard-link en">See SME services →</a>
+    </div>
+    <!-- Freelancer -->
+    <div class="pcard hi">
+      <div class="pcard-icon">👤</div>
+      <div class="pcard-tag">FREELANCER</div>
+      <div class="pcard-name es">Persona Física &amp; Freelancer</div>
+      <div class="pcard-name en">Freelancer &amp; Self-Employed</div>
+      <p class="pcard-desc es">Trabaja solo pero opera como empresa. Automatizamos tu administración para que dediques tu tiempo a lo que genera dinero.</p>
+      <p class="pcard-desc en">Work solo but operate like a company. We automate your admin so you spend time on what actually earns money.</p>
+      <div class="pcard-chips">
+        <span class="chip">Consultores</span>
+        <span class="chip">Diseñadores</span>
+        <span class="chip">Contadores</span>
+        <span class="chip">Abogados</span>
+      </div>
+      <div class="pcard-list">
+        <div class="pcard-li es">Contabilidad simplificada automatizada</div>
+        <div class="pcard-li en">Simplified automated accounting</div>
+        <div class="pcard-li es">Cálculo de IVA e ISR mensual</div>
+        <div class="pcard-li en">Monthly IVA &amp; ISR calculation</div>
+        <div class="pcard-li es">Alertas antes de cada declaración</div>
+        <div class="pcard-li en">Alerts before each filing deadline</div>
+        <div class="pcard-li es">Organización de correos con IA</div>
+        <div class="pcard-li en">AI-powered email organization</div>
+      </div>
+      <a href="#servicios" class="pcard-link es">Ver servicios Freelancer →</a>
+      <a href="#servicios" class="pcard-link en">See Freelancer services →</a>
+    </div>
+    <!-- Expat -->
+    <div class="pcard">
+      <div class="pcard-icon">🌎</div>
+      <div class="pcard-tag">EXPAT</div>
+      <div class="pcard-name">Expat &amp; Foreigner</div>
+      <p class="pcard-desc">Americans, Canadians, Europeans &amp; Swedes living or investing in Mexico. We navigate SAT so you don't have to — fully in English.</p>
+      <div class="pcard-chips">
+        <span class="chip">US Citizens</span>
+        <span class="chip">Canadians</span>
+        <span class="chip">Digital Nomads</span>
+        <span class="chip">Property Owners</span>
+      </div>
+      <div class="pcard-list">
+        <div class="pcard-li">RFC registration &amp; SAT setup</div>
+        <div class="pcard-li">Tax residency &amp; 183-day rule</div>
+        <div class="pcard-li">US/Canada/Sweden treaty benefits</div>
+        <div class="pcard-li">Property &amp; Fideicomiso compliance</div>
+      </div>
+      <a href="#expats" class="pcard-link">See Expat services →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FACTS -->
+<section class="facts">
+  <div class="sec-label es">¿Sabías que?</div>
+  <div class="sec-label en">Did you know?</div>
+  <h2 class="sec-title es">El costo oculto de no automatizar</h2>
+  <h2 class="sec-title en">The hidden cost of not automating</h2>
+  <div class="facts-grid">
+    <div class="fact">
+      <div class="fact-n">01</div>
+      <div class="fact-icon">⏱️</div>
+      <div class="fact-title es">13 horas al mes en tareas manuales</div>
+      <div class="fact-title en">13 hours a month on manual tasks</div>
+      <p class="fact-text es">El empresario mexicano promedio dedica más de 3 horas semanales a tareas administrativas repetitivas: conciliar estados de cuenta, bajar CFDIs del SAT, clasificar gastos y armar reportes que podrían hacerse solos.</p>
+      <p class="fact-text en">The average Mexican business owner spends over 3 hours per week on repetitive admin: reconciling accounts, downloading CFDIs from SAT, classifying expenses, and building reports that could run automatically.</p>
+      <span class="fact-badge">Fuente: INEGI · McKinsey 2023</span>
+    </div>
+    <div class="fact">
+      <div class="fact-n">02</div>
+      <div class="fact-icon">📋</div>
+      <div class="fact-title es">CFDI 4.0: más requisitos, más errores</div>
+      <div class="fact-title en">CFDI 4.0: more requirements, more errors</div>
+      <p class="fact-text es">Desde 2022, el CFDI 4.0 exige nuevos campos obligatorios como código postal del receptor, uso del CFDI y régimen fiscal correcto. Un error puede invalidar la factura y generar problemas ante el SAT. La automatización elimina este riesgo.</p>
+      <p class="fact-text en">Since 2022, CFDI 4.0 requires new mandatory fields — postal code, CFDI use, fiscal regime. One error invalidates the invoice and creates SAT issues. Automation eliminates this risk entirely.</p>
+      <span class="fact-badge">SAT · CFDI 4.0 · 2022</span>
+    </div>
+    <div class="fact">
+      <div class="fact-n">03</div>
+      <div class="fact-icon">🌎</div>
+      <div class="fact-title">183-Day Rule · Regla de los 183 días</div>
+      <p class="fact-text">The day you spend your 183rd day in Mexico in a calendar year, your worldwide income becomes taxable here — including salary from your US employer. Most expats don't realize this until it's too late. We monitor it proactively.</p>
+      <span class="fact-badge">Art. 9 CFF · LISR Título IV</span>
+    </div>
+    <div class="fact">
+      <div class="fact-n">04</div>
+      <div class="fact-icon">🤖</div>
+      <div class="fact-title es">IA que ya funciona en tu negocio</div>
+      <div class="fact-title en">AI that already works in your business</div>
+      <p class="fact-text es">No necesitas saber de tecnología. Conectamos las herramientas que ya usas — correo, WhatsApp, hojas de cálculo, ERP — y hacemos que se hablen solas. Sin código, sin complicaciones, con resultados desde el primer mes.</p>
+      <p class="fact-text en">You don't need technical knowledge. We connect the tools you already use — email, WhatsApp, spreadsheets, ERP — and make them work together automatically. No code, no complications, results from month one.</p>
+      <span class="fact-badge">IA · Automatización · Sin código</span>
+    </div>
+    <div class="fact">
+      <div class="fact-n">05</div>
+      <div class="fact-icon">📊</div>
+      <div class="fact-title es">RESICO: el régimen más sencillo del SAT</div>
+      <div class="fact-title en">RESICO: Mexico's simplest tax regime</div>
+      <p class="fact-text es">El Régimen Simplificado de Confianza (Art. 113-E LISR) ofrece tasas de ISR del 1 al 2.5% para personas físicas con ingresos hasta $3.5M al año. Pero no todos califican, y los errores cuestan. Nosotros verificamos tu elegibilidad y mantenemos tu cumplimiento activo.</p>
+      <p class="fact-text en">RESICO (Art. 113-E LISR) offers ISR rates as low as 1–2.5% for individuals earning up to $3.5M MXN/year. Not everyone qualifies though, and errors are costly. We verify your eligibility and keep your compliance active.</p>
+      <span class="fact-badge">RESICO · Art. 113-E LISR</span>
+    </div>
+    <div class="fact">
+      <div class="fact-n">06</div>
+      <div class="fact-icon">🏠</div>
+      <div class="fact-title">Airbnb &amp; Rentas Vacacionales / Vacation Rentals</div>
+      <p class="fact-text">Mexican law requires ISR on rental income, 16% IVA, and a state lodging tax (ISH) that varies by state. Airbnb retains some taxes but not all. If you own a vacation rental in Mexico — especially in a coastal zone — you likely have unmet obligations.</p>
+      <span class="fact-badge">ISR arrendamiento · IVA 16% · ISH estatal</span>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="como-funciona">
+  <div class="how-inner">
+    <div>
+      <div class="sec-label es">Cómo funciona</div>
+      <div class="sec-label en">How it works</div>
+      <h2 class="sec-title es">Del caos operativo<br>al piloto automático</h2>
+      <h2 class="sec-title en">From operational chaos<br>to autopilot</h2>
+      <p class="sec-sub es">Cuatro pasos para transformar tu administración sin cambiar lo que ya funciona en tu negocio.</p>
+      <p class="sec-sub en">Four steps to transform your administration without changing what already works in your business.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n">01</div>
+          <div>
+            <div class="step-title es">Estudio de factibilidad gratuito</div>
+            <div class="step-title en">Free feasibility study</div>
+            <p class="step-text es">Analizamos tu negocio, tus herramientas actuales y tus procesos. En 24 horas te decimos exactamente qué puedes automatizar, cuánto tiempo recuperarías y cuánto dinero representa.</p>
+            <p class="step-text en">We analyze your business, current tools, and workflows. Within 24 hours we tell you exactly what can be automated, how much time you'd recover, and what that's worth in money.</p>
+            <div class="step-tag es">Sin costo · Sin compromiso · 24 horas</div>
+            <div class="step-tag en">No cost · No obligation · 24 hours</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">02</div>
+          <div>
+            <div class="step-title es">Diseño de tu flujo personalizado</div>
+            <div class="step-title en">Custom workflow design</div>
+            <p class="step-text es">Diseñamos el sistema de automatización específico para tu negocio. Conectamos tus herramientas existentes — correo, ERP, hojas de cálculo — sin que tengas que aprender nada nuevo.</p>
+            <p class="step-text en">We design the automation system specific to your business. We connect your existing tools — email, ERP, spreadsheets — without you needing to learn anything new.</p>
+            <div class="step-tag">Make · Zapier · Google · WhatsApp · SAT</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">03</div>
+          <div>
+            <div class="step-title es">Implementación y configuración</div>
+            <div class="step-title en">Implementation &amp; setup</div>
+            <p class="step-text es">Implementamos todo nosotros. No necesitas involucrarte en lo técnico. En días, no meses, tu sistema ya está funcionando y generando resultados reales.</p>
+            <p class="step-text en">We implement everything ourselves. No technical involvement required from you. In days, not months, your system is live and producing real results.</p>
+            <div class="step-tag es">Semanas, no meses</div>
+            <div class="step-tag en">Weeks, not months</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n">04</div>
+          <div>
+            <div class="step-title es">Soporte continuo y optimización</div>
+            <div class="step-title en">Ongoing support &amp; optimization</div>
+            <p class="step-text es">Tu sistema no es un proyecto que se entrega y se olvida. Lo monitoreamos, ajustamos y mejoramos continuamente para que siempre funcione al 100%.</p>
+            <p class="step-text en">Your system isn't a one-time project. We monitor, adjust, and continuously improve it so it always runs at 100%.</p>
+            <div class="step-tag es">Soporte activo · Mejora continua</div>
+            <div class="step-tag en">Active support · Continuous improvement</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="how-aside">
+      <div class="aside-card">
+        <div class="aside-head">
+          <div>
+            <div class="aside-head-title es">Caso real — Consultora CDMX</div>
+            <div class="aside-head-title en">Real case — CDMX Consultant</div>
+            <div class="aside-head-sub">María L. · Factura $45,000 MXN/mes</div>
+          </div>
+        </div>
+        <div class="aside-body">
+          <div class="aside-row"><span class="aside-label es">Horas/mes en tareas manuales</span><span class="aside-label en">Hours/month on manual tasks</span><span class="aside-val">13 hrs</span></div>
+          <div class="aside-row"><span class="aside-label es">Tarifa por hora</span><span class="aside-label en">Hourly rate</span><span class="aside-val">$350 MXN</span></div>
+          <div class="aside-row"><span class="aside-label es">Costo del desorden/mes</span><span class="aside-label en">Cost of chaos/month</span><span class="aside-val r">−$4,550</span></div>
+          <div class="aside-row"><span class="aside-label es">Plan EnkelSumma</span><span class="aside-label en">EnkelSumma plan</span><span class="aside-val">$1,500 MXN</span></div>
+          <div class="aside-total">
+            <span class="aside-total-label es">Ahorro neto mensual</span>
+            <span class="aside-total-label en">Monthly net saving</span>
+            <span class="aside-total-val" style="color:var(--green)">+$3,050 MXN</span>
+          </div>
+          <div class="aside-note">"<span class="es">Con EnkelSumma recupero 13 horas al mes. Las dedico a conseguir un cliente más — eso vale mucho más que los $1,500 que pago.</span><span class="en">With EnkelSumma I recover 13 hours a month. I use them to land one more client — worth far more than the $1,500 I pay.</span>"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES WITH TABS -->
+<section class="services" id="servicios">
+  <div class="sec-label es">Servicios</div>
+  <div class="sec-label en">Services</div>
+  <h2 class="sec-title es">Exactamente lo que necesita tu perfil</h2>
+  <h2 class="sec-title en">Exactly what your profile needs</h2>
+  <div class="seg-tabs">
+    <button class="stab on" id="stab-pyme" onclick="showTab('pyme')">
+      <span class="es">🏢 PYMES</span><span class="en">🏢 SME</span>
+    </button>
+    <button class="stab" id="stab-pf" onclick="showTab('pf')">
+      <span class="es">👤 Freelancer / Persona Física</span><span class="en">👤 Freelancer</span>
+    </button>
+    <button class="stab" id="stab-expat" onclick="showTab('expat')">🌎 Expats &amp; Foreigners</button>
+  </div>
+
+  <!-- PYME panel -->
+  <div class="spanel on" id="spanel-pyme">
+    <div class="seg-intro">
+      <div class="seg-intro-title es">Para pequeñas y medianas empresas</div>
+      <div class="seg-intro-title en">For small and medium businesses</div>
+      <p class="seg-intro-desc es">Automatizamos las operaciones de tu negocio para que tu equipo deje de perder tiempo en tareas repetitivas y se enfoque en crecer.</p>
+      <p class="seg-intro-desc en">We automate your business operations so your team stops wasting time on repetitive tasks and focuses on growth.</p>
+      <div class="seg-chips">
+        <span class="chip es">Tiendas en línea</span><span class="chip es">Agencias</span><span class="chip es">Servicios profesionales</span><span class="chip es">Comercios</span><span class="chip es">Distribuidoras</span>
+        <span class="chip en">E-commerce</span><span class="chip en">Agencies</span><span class="chip en">Professional services</span><span class="chip en">Retail</span>
+      </div>
+    </div>
+    <div class="svcs-grid">
+      <div class="svc"><div class="svc-num">01</div><div class="svc-icon">⚡</div><div class="svc-title es">Análisis inteligente de correos</div><div class="svc-title en">Smart email analysis</div><p class="svc-desc es">Analizamos tu correo electrónico con IA para clasificar, priorizar y organizar tus mensajes automáticamente. Sin importar qué plataforma uses.</p><p class="svc-desc en">We analyze your email with AI to automatically classify, prioritize, and organize messages. Any email platform.</p><span class="svc-tag">IA · Gmail · Outlook · Cualquier proveedor</span></div>
+      <div class="svc"><div class="svc-num">02</div><div class="svc-icon">🔄</div><div class="svc-title es">Conexión automática entre herramientas</div><div class="svc-title en">Automatic tool integration</div><p class="svc-desc es">Hacemos que todas tus aplicaciones se pasen información solas. Lo que hoy haces a mano — copiar datos, actualizar registros — lo hacemos automático.</p><p class="svc-desc en">We make all your apps share data automatically. What you do manually today — copying data, updating records — runs itself.</p><span class="svc-tag">Make · Zapier · Sin código</span></div>
+      <div class="svc"><div class="svc-num">03</div><div class="svc-icon">📊</div><div class="svc-title es">Reportes e informes en tiempo real</div><div class="svc-title en">Real-time reports &amp; dashboards</div><p class="svc-desc es">Conectamos tus datos a Google Sheets o Excel para que tengas visibilidad total de tu negocio sin armar el reporte tú mismo cada semana.</p><p class="svc-desc en">We connect your data to Google Sheets or Excel so you have full business visibility without building the report yourself every week.</p><span class="svc-tag">Google Sheets · Excel · Power BI</span></div>
+      <div class="svc"><div class="svc-num">04</div><div class="svc-icon">🧮</div><div class="svc-title es">Módulo contable automatizado</div><div class="svc-title en">Automated accounting module</div><p class="svc-desc es">Conciliación bancaria, cuentas por cobrar y pagar, indicadores financieros y alertas fiscales, todo actualizado automáticamente. Sin contratar un contador de tiempo completo.</p><p class="svc-desc en">Bank reconciliation, accounts receivable/payable, financial KPIs, and fiscal alerts — all updated automatically. No full-time accountant needed.</p><span class="svc-tag">Contabilidad · Finanzas · SAT · CFDI 4.0</span></div>
+    </div>
+  </div>
+
+  <!-- PF panel -->
+  <div class="spanel" id="spanel-pf">
+    <div class="seg-intro">
+      <div class="seg-intro-title es">Para freelancers y profesionistas independientes</div>
+      <div class="seg-intro-title en">For freelancers and independent professionals</div>
+      <p class="seg-intro-desc es">Trabaja solo pero opera como empresa. Automatizamos tu administración para que dediques tu tiempo a lo que realmente genera dinero.</p>
+      <p class="seg-intro-desc en">Work solo but operate like a company. We automate your admin so you spend time on what actually earns money.</p>
+      <div class="seg-chips">
+        <span class="chip">Consultores</span><span class="chip">Diseñadores</span><span class="chip">Contadores</span><span class="chip">Abogados</span><span class="chip">Coaches</span><span class="chip">Creadores de contenido</span>
+      </div>
+    </div>
+    <div class="svcs-grid">
+      <div class="svc"><div class="svc-num">01</div><div class="svc-icon">📁</div><div class="svc-title es">Organización digital personal</div><div class="svc-title en">Personal digital organization</div><p class="svc-desc es">Correos, clientes, tareas y proyectos organizados automáticamente. Opera como una empresa profesional sin esfuerzo administrativo.</p><p class="svc-desc en">Emails, clients, tasks, and projects organized automatically. Operate like a professional firm without administrative burden.</p><span class="svc-tag">Correo · Clientes · Proyectos</span></div>
+      <div class="svc"><div class="svc-num">02</div><div class="svc-icon">💰</div><div class="svc-title es">Contabilidad personal simplificada</div><div class="svc-title en">Simplified personal accounting</div><p class="svc-desc es">Registramos tus ingresos y gastos automáticamente, calculamos tu IVA e ISR, y te avisamos antes de cada declaración fiscal. Sin sorpresas.</p><p class="svc-desc en">We automatically record your income and expenses, calculate your IVA and ISR, and alert you before each tax filing. No surprises.</p><span class="svc-tag">IVA · ISR · Flujo de caja · CFDI 4.0</span></div>
+      <div class="svc"><div class="svc-num">03</div><div class="svc-icon">⚡</div><div class="svc-title es">Análisis inteligente de correos</div><div class="svc-title en">Smart email inbox</div><p class="svc-desc es">Tu bandeja de entrada organizada con IA. Nunca más pierdas un correo importante ni pierdas tiempo clasificando mensajes manualmente.</p><p class="svc-desc en">Your inbox organized with AI. Never miss an important email or waste time manually sorting messages again.</p><span class="svc-tag">IA · Automatización · Cualquier correo</span></div>
+      <div class="svc"><div class="svc-num">04</div><div class="svc-icon">🤖</div><div class="svc-title es">Atención y respuestas automáticas</div><div class="svc-title en">Automated client responses</div><p class="svc-desc es">Tu negocio responde mensajes y gestiona clientes incluso cuando no estás disponible. Con IA que se comunica con tu propio estilo.</p><p class="svc-desc en">Your business responds to messages and manages clients even when you're unavailable. AI that communicates in your own voice.</p><span class="svc-tag">IA · Correo · WhatsApp · Mensajería</span></div>
+    </div>
+  </div>
+
+  <!-- Expat panel -->
+  <div class="spanel" id="spanel-expat">
+    <div class="seg-intro">
+      <div class="seg-intro-title">For Americans, Canadians, Swedes &amp; Europeans living in Mexico</div>
+      <p class="seg-intro-desc">Bilingual tax consulting and fiscal compliance for expats, retirees, remote workers, and property owners throughout Mexico. We speak your language — literally.</p>
+      <div class="seg-chips">
+        <span class="chip">US Citizens</span><span class="chip">Canadians</span><span class="chip">Europeans</span><span class="chip">Digital Nomads</span><span class="chip">Retirees in Mexico</span><span class="chip">Vacation Rental Owners</span>
+      </div>
+    </div>
+    <div class="svcs-grid">
+      <div class="svc"><div class="svc-num">01</div><div class="svc-icon">🏠</div><div class="svc-title">Tax Residency Analysis</div><p class="svc-desc">We determine when you become a Mexican tax resident (183-day rule), what obligations change, and how to structure your situation to stay compliant on both sides of the border.</p><span class="svc-tag">Art. 9 CFF · LISR Título IV vs. Título V</span></div>
+      <div class="svc"><div class="svc-num">02</div><div class="svc-icon">🤝</div><div class="svc-title">US, Canada &amp; Sweden Tax Treaty</div><p class="svc-desc">Apply your treaty benefits before SAT withholds at the full rate. We handle pension, Social Security, rental, and capital gains treaty claims with the right SAT documentation.</p><span class="svc-tag">CDI MX-USA · MX-Canada · MX-Sweden</span></div>
+      <div class="svc"><div class="svc-num">03</div><div class="svc-icon">🏡</div><div class="svc-title">Property &amp; Fideicomiso</div><p class="svc-desc">Buying real estate in a restricted zone as a foreigner? We guide you through the bank trust structure, RFC requirements for CFDI 4.0, and fiscal implications at every stage.</p><span class="svc-tag">Fideicomiso · RFC · CFDI 4.0 · ISR enajenación</span></div>
+      <div class="svc"><div class="svc-num">04</div><div class="svc-icon">💻</div><div class="svc-title">Remote Work &amp; Digital Nomad Setup</div><p class="svc-desc">Earning foreign income while living in Mexico? We build your compliant structure — RFC registration, ISR regime selection, CFDI issuance — so you work freely without SAT surprises.</p><span class="svc-tag">RFC · RESICO vs RG · Ingresos extranjeros</span></div>
+    </div>
+    <div style="margin-top:1.5rem;text-align:center">
+      <a href="#expats" class="btn-dark">See the full Expat guide below →</a>
+    </div>
+  </div>
+</section>
+
+<!-- EXPATS -->
+<section class="expats" id="expats">
+  <div class="sec-label">For Expats &amp; Foreigners · Para Extranjeros</div>
+  <h2 class="sec-title">Mexican Tax Services<br><em style="font-style:normal;color:var(--gold)">Fully in English</em></h2>
+  <p class="sec-sub">Americans, Canadians, Swedes, and Europeans living or investing in Mexico face a maze of local tax rules — on top of obligations back home. We specialize in exactly this overlap, in clear plain English.</p>
+  <div class="expats-grid">
+    <div class="ecard"><div class="ecard-icon">🏠</div><div class="ecard-title">Tax Residency &amp; The 183-Day Rule</div><p class="ecard-desc">The moment you cross 183 days in Mexico in a calendar year, your worldwide income becomes taxable here. We analyze your situation proactively so you're never caught off guard, and help you plan your residency status.</p><span class="ecard-legal">Art. 9 CFF · LISR Título IV vs. Título V · Casa habitación</span></div>
+    <div class="ecard"><div class="ecard-icon">🤝</div><div class="ecard-title">US, Canada &amp; Sweden Tax Treaty Benefits</div><p class="ecard-desc">Mexico has tax treaties with the US, Canada, Sweden, Germany, and 60+ other countries. Don't let SAT withhold at maximum rate when treaty rates are lower — sometimes zero. We file the right certificates from day one.</p><span class="ecard-legal">CDI MX-USA · MX-Canadá · MX-Suecia · Art. 169 LISR</span></div>
+    <div class="ecard"><div class="ecard-icon">🏡</div><div class="ecard-title">Buying Property in Mexico</div><p class="ecard-desc">Foreign nationals cannot hold title to property in restricted zones directly — a bank trust (fideicomiso) is required. We walk you through RFC requirements, CFDI 4.0 compliance, notary withholding taxes, and everything before signing.</p><span class="ecard-legal">Fideicomiso · CFDI 4.0 · CP domicilio fiscal · ISR enajenación</span></div>
+    <div class="ecard"><div class="ecard-icon">💻</div><div class="ecard-title">Remote Work &amp; Digital Nomads</div><p class="ecard-desc">Earning salary or freelance income from a US or EU company while living in Mexico? If you're a tax resident, that income is fully taxable here. We structure your RFC registration, choose the right ISR regime, and keep you clean on both sides.</p><span class="ecard-legal">RFC · RESICO Art. 113-E · Régimen General · Declaración anual</span></div>
+    <div class="ecard"><div class="ecard-icon">🏖️</div><div class="ecard-title">Airbnb &amp; Vacation Rental Income</div><p class="ecard-desc">Renting your Mexican property on Airbnb or VRBO? Mexican law requires ISR on rental income, 16% IVA, and a local lodging tax that varies by state. We calculate and file everything correctly — including the platform digital tax retentions.</p><span class="ecard-legal">Arrendamiento Art. 114 LISR · ISH estatal · Plataformas digitales</span></div>
+    <div class="ecard"><div class="ecard-icon">🏛️</div><div class="ecard-title">FBAR &amp; Foreign Account Reporting</div><p class="ecard-desc">Opening a Mexican bank account as a US citizen? If the balance exceeds $10,000 USD at any point, you must file FinCEN 114 (FBAR) — with penalties up to $10,000 per violation. We help you understand your obligation and coordinate with your US tax preparer.</p><span class="ecard-legal">FinCEN 114 · FATCA · FBAR · Cuenta bancaria MXN</span></div>
+  </div>
+
+  <div class="expat-checklist">
+    <div class="expat-checklist-title">Your First Steps When Arriving in Mexico</div>
+    <p class="expat-checklist-sub">A practical roadmap — in the right order — for foreigners new to Mexican fiscal obligations.</p>
+    <div class="expat-steps">
+      <div class="estep"><div class="estep-n">1</div><div><div class="estep-title">Get your RFC with SAT</div><p class="estep-text">Your Registro Federal de Contribuyentes is required to open a bank account, purchase property, or issue any invoice in Mexico. We handle the full registration process.</p></div></div>
+      <div class="estep"><div class="estep-n">2</div><div><div class="estep-title">Verify your residency status</div><p class="estep-text">Count your days carefully. Once you hit 183 days in a calendar year, you become a Mexican tax resident and your worldwide income is taxable here.</p></div></div>
+      <div class="estep"><div class="estep-n">3</div><div><div class="estep-title">Claim your treaty benefits</div><p class="estep-text">If you're from the US, Canada, Sweden, or Germany, a tax treaty likely reduces or eliminates Mexican withholding on certain income. Claim it proactively.</p></div></div>
+      <div class="estep"><div class="estep-n">4</div><div><div class="estep-title">Choose the right tax regime</div><p class="estep-text">RESICO PF, Régimen General, or non-resident withholding (Título V)? The right choice depends on your income type, amount, and residency status. We run the numbers.</p></div></div>
+      <div class="estep"><div class="estep-n">5</div><div><div class="estep-title">Set up your property correctly</div><p class="estep-text">Your domicilio fiscal (SAT registered address) must match the postal code on your CFDI invoices. Get this right before your first rental or sale transaction.</p></div></div>
+      <div class="estep"><div class="estep-n">6</div><div><div class="estep-title">Coordinate with your home country</div><p class="estep-text">Don't close the loop on just the Mexican side. We help you communicate clearly with your US/Canada/EU tax advisor so nothing falls between the cracks.</p></div></div>
+    </div>
+  </div>
+
+  <div class="expat-cta">
+    <div class="expat-cta-text">
+      <h3>Ready to get your Mexican taxes under control?</h3>
+      <p>Free 30-minute consultation · Bilingual English/Spanish · Available remotely across all of Mexico</p>
+      <div class="expat-cta-confirms">
+        <span>We speak English</span>
+        <span>Hablamos español</span>
+        <span>No obligation</span>
+        <span>MX-Sweden CDI experts</span>
+      </div>
+    </div>
+    <a href="#contacto" class="btn-dark" style="white-space:nowrap">Book a Free Consultation →</a>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="calc" id="calculadora">
+  <div class="sec-label es">Calculadora de ahorro</div>
+  <div class="sec-label en">Savings calculator</div>
+  <h2 class="sec-title es">Descubre cuánto te cuesta<br><em style="font-style:normal;color:var(--gold)">no automatizar</em></h2>
+  <h2 class="sec-title en">Discover what it costs<br><em style="font-style:normal;color:var(--gold)">not to automate</em></h2>
+  <p class="sec-sub es" style="margin-bottom:3rem">Cada hora que dedicas a tareas manuales es dinero que podrías estar generando. Calcula tu costo real en segundos.</p>
+  <p class="sec-sub en" style="margin-bottom:3rem">Every hour you spend on manual tasks is money you could be generating. Calculate your real cost in seconds.</p>
+  <div class="calc-inner">
+    <div class="calc-left">
+      <div class="calc-example">
+        <div class="calc-example-title es">Ejemplo real — caso típico México</div>
+        <div class="calc-example-title en">Real example — typical Mexico case</div>
+        <div class="calc-profile">
+          <div class="calc-avatar">ML</div>
+          <div>
+            <div class="calc-name">María L. — <span class="es">Consultora independiente</span><span class="en">Independent Consultant</span></div>
+            <div class="calc-role">Monterrey · <span class="es">Factura $45,000 MXN/mes</span><span class="en">Invoices $45,000 MXN/month</span></div>
+          </div>
+        </div>
+        <div class="calc-row"><span class="calc-row-label es">Horas/mes bajando CFDIs del SAT</span><span class="calc-row-label en">Hours/month downloading CFDIs</span><span class="calc-row-val">3 hrs</span></div>
+        <div class="calc-row"><span class="calc-row-label es">Horas/mes clasificando gastos</span><span class="calc-row-label en">Hours/month classifying expenses</span><span class="calc-row-val">4 hrs</span></div>
+        <div class="calc-row"><span class="calc-row-label es">Horas/mes revisando correos</span><span class="calc-row-label en">Hours/month reviewing emails</span><span class="calc-row-val">6 hrs</span></div>
+        <div class="calc-row"><span class="calc-row-label es">Total horas perdidas al mes</span><span class="calc-row-label en">Total hours wasted per month</span><span class="calc-row-val a">13 hrs</span></div>
+        <div class="calc-row"><span class="calc-row-label es">Costo mensual del desorden</span><span class="calc-row-label en">Monthly cost of chaos</span><span class="calc-row-val r">−$4,550 MXN</span></div>
+        <div class="calc-row"><span class="calc-row-label es">Plan EnkelSumma Freelancer</span><span class="calc-row-label en">EnkelSumma Freelancer plan</span><span class="calc-row-val">$1,500 MXN</span></div>
+        <div class="calc-row"><span class="calc-row-label es">Ahorro neto mensual</span><span class="calc-row-label en">Monthly net saving</span><span class="calc-row-val g">+$3,050 MXN</span></div>
+        <div class="calc-note es">"Con EnkelSumma recupero 13 horas al mes que dedico a conseguir un cliente más. Eso vale mucho más que los $1,500 que pago."</div>
+        <div class="calc-note en">"With EnkelSumma I recover 13 hours a month that I use to land one more client. That's worth far more than the $1,500 I pay."</div>
+      </div>
+    </div>
+    <div>
+      <div class="calc-widget">
+        <div class="calc-widget-title es">Tu calculadora personal</div>
+        <div class="calc-widget-title en">Your personal calculator</div>
+        <div class="calc-widget-sub es">Ajusta los valores según tu situación real</div>
+        <div class="calc-widget-sub en">Adjust the values to your real situation</div>
+        <div class="slider-group">
+          <div class="slider-top">
+            <span class="slider-label es">Horas/mes en tareas manuales</span>
+            <span class="slider-label en">Hours/month on manual tasks</span>
+            <span class="slider-val" id="hrs-val">10 hrs</span>
+          </div>
+          <input type="range" min="2" max="50" value="10" step="1" id="sl-hrs">
+        </div>
+        <div class="slider-group">
+          <div class="slider-top">
+            <span class="slider-label es">Tu valor por hora (MXN)</span>
+            <span class="slider-label en">Your hourly value (MXN)</span>
+            <span class="slider-val" id="rate-val">$350</span>
+          </div>
+          <input type="range" min="100" max="1500" value="350" step="50" id="sl-rate">
+        </div>
+        <div class="calc-result">
+          <div class="result-grid">
+            <div class="result-item"><div class="result-num r" id="r-costo">$3,500</div><div class="result-lbl es">pierdes al mes</div><div class="result-lbl en">lost per month</div></div>
+            <div class="result-item"><div class="result-num a" id="r-plan">$1,500</div><div class="result-lbl es">plan sugerido/mes</div><div class="result-lbl en">suggested plan/mo</div></div>
+            <div class="result-item"><div class="result-num g" id="r-ahorro">+$2,000</div><div class="result-lbl es">ahorro neto/mes</div><div class="result-lbl en">net saving/month</div></div>
+            <div class="result-item"><div class="result-num g" id="r-anual">+$24,000</div><div class="result-lbl es">ahorro al año</div><div class="result-lbl en">saving per year</div></div>
+          </div>
+          <div class="result-phrase" id="r-phrase">
+            <span class="es">"Estás perdiendo el equivalente a 10 horas de trabajo cada mes. Con EnkelSumma ese tiempo lo recuperas desde el primer día."</span>
+            <span class="en">"You're losing the equivalent of 10 hours of work every month. With EnkelSumma you recover that time from day one."</span>
+          </div>
+          <a href="#contacto" class="btn-dark" style="display:block;text-align:center;padding:.75rem">
+            <span class="es">Solicitar estudio gratuito →</span>
+            <span class="en">Request free feasibility study →</span>
+          </a>
+        </div>
+        <p style="font-size:.7rem;color:var(--muted2);margin-top:1rem;line-height:1.55;"><span class="es">Estimaciones basadas en datos de INEGI, McKinsey Global Institute (2023) y la OCDE. El ahorro real depende del tipo de negocio y procesos específicos.</span><span class="en">Estimates based on INEGI, McKinsey Global Institute (2023) and OECD data. Actual savings depend on your specific business and processes.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="precios">
+  <div class="sec-label es">Precios</div>
+  <div class="sec-label en">Pricing</div>
+  <h2 class="sec-title es">Invierte menos de lo que ahorras cada mes</h2>
+  <h2 class="sec-title en">Invest less than what you save every month</h2>
+  <p class="sec-sub es">Precios de lanzamiento para los primeros clientes en México, LATAM y expats.</p>
+  <p class="sec-sub en">Launch pricing for our first clients in Mexico, LATAM, and expats.</p>
+  <div class="pricing-grid">
+    <!-- Freelancer -->
+    <div class="prc">
+      <div class="prc-seg es">Persona física · Freelancer</div>
+      <div class="prc-seg en">Freelancer · Self-employed</div>
+      <div class="prc-name es">Plan Freelancer</div>
+      <div class="prc-name en">Freelancer Plan</div>
+      <div class="prc-amount">
+        <span class="prc-currency">$</span>
+        <span class="prc-val">1,500</span>
+        <span class="prc-currency">MXN</span>
+      </div>
+      <div class="prc-period es">por mes</div>
+      <div class="prc-period en">per month</div>
+      <div class="prc-usd">~$75 USD · <span class="es">según tipo de cambio Banxico</span><span class="en">at Banxico exchange rate</span></div>
+      <div class="prc-divider"></div>
+      <div class="prc-items">
+        <div class="prc-item es">Organización de correos con IA</div>
+        <div class="prc-item es">Registro automático de ingresos y gastos</div>
+        <div class="prc-item es">Cálculo de IVA e ISR mensual</div>
+        <div class="prc-item es">Reporte financiero mensual</div>
+        <div class="prc-item es">Alertas de declaraciones fiscales</div>
+        <div class="prc-item es">Hasta 8,000 operaciones/mes</div>
+        <div class="prc-item en">AI email organization</div>
+        <div class="prc-item en">Automatic income &amp; expense tracking</div>
+        <div class="prc-item en">Monthly IVA &amp; ISR calculation</div>
+        <div class="prc-item en">Monthly financial report</div>
+        <div class="prc-item en">Tax filing alerts</div>
+        <div class="prc-item en">Up to 8,000 transactions/month</div>
+      </div>
+      <div class="prc-note es">✦ Incluye estudio de factibilidad gratuito</div>
+      <div class="prc-note en">✦ Includes free feasibility study</div>
+      <a href="#contacto" class="prc-cta es">Empezar ahora →</a>
+      <a href="#contacto" class="prc-cta en">Get started →</a>
+    </div>
+    <!-- Negocio (featured) -->
+    <div class="prc feat">
+      <div class="prc-seg es">PYME · Negocio en crecimiento</div>
+      <div class="prc-seg en">SME · Growing business</div>
+      <div class="prc-name es">Plan Negocio</div>
+      <div class="prc-name en">Business Plan</div>
+      <div class="prc-amount">
+        <span class="prc-currency">$</span>
+        <span class="prc-val">2,980</span>
+        <span class="prc-currency">MXN</span>
+      </div>
+      <div class="prc-period es">por mes</div>
+      <div class="prc-period en">per month</div>
+      <div class="prc-usd">~$149 USD · <span class="es">según tipo de cambio Banxico</span><span class="en">at Banxico exchange rate</span></div>
+      <div class="prc-divider"></div>
+      <div class="prc-items">
+        <div class="prc-item es">Todo lo del Plan Freelancer</div>
+        <div class="prc-item es">Conexión automática de herramientas</div>
+        <div class="prc-item es">Dashboard financiero en tiempo real</div>
+        <div class="prc-item es">Módulo contable completo</div>
+        <div class="prc-item es">Conciliación bancaria automatizada</div>
+        <div class="prc-item es">Soporte por WhatsApp</div>
+        <div class="prc-item es">Hasta 20,000 operaciones/mes</div>
+        <div class="prc-item en">Everything in Freelancer Plan</div>
+        <div class="prc-item en">Automatic tool integrations</div>
+        <div class="prc-item en">Real-time financial dashboard</div>
+        <div class="prc-item en">Full accounting module</div>
+        <div class="prc-item en">Automated bank reconciliation</div>
+        <div class="prc-item en">WhatsApp support</div>
+        <div class="prc-item en">Up to 20,000 transactions/month</div>
+      </div>
+      <div class="prc-note es">✦ Incluye estudio de factibilidad gratuito</div>
+      <div class="prc-note en">✦ Includes free feasibility study</div>
+      <a href="#contacto" class="prc-cta es">Empezar ahora →</a>
+      <a href="#contacto" class="prc-cta en">Get started →</a>
+    </div>
+    <!-- Empresa -->
+    <div class="prc">
+      <div class="prc-seg es">PYME avanzada · Empresa</div>
+      <div class="prc-seg en">Advanced SME · Enterprise</div>
+      <div class="prc-name es">Plan Empresa</div>
+      <div class="prc-name en">Enterprise Plan</div>
+      <div class="prc-amount">
+        <span class="prc-currency">$</span>
+        <span class="prc-val">5,980</span>
+        <span class="prc-currency">MXN</span>
+      </div>
+      <div class="prc-period es">por mes</div>
+      <div class="prc-period en">per month</div>
+      <div class="prc-usd">~$299 USD · <span class="es">según tipo de cambio Banxico</span><span class="en">at Banxico exchange rate</span></div>
+      <div class="prc-divider"></div>
+      <div class="prc-items">
+        <div class="prc-item es">Todo lo del Plan Negocio</div>
+        <div class="prc-item es">Implementación totalmente a medida</div>
+        <div class="prc-item es">Integraciones con sistemas propios</div>
+        <div class="prc-item es">Asesoría financiera mensual incluida</div>
+        <div class="prc-item es">Soporte prioritario 24/7</div>
+        <div class="prc-item es">Capacitación para tu equipo</div>
+        <div class="prc-item en">Everything in Business Plan</div>
+        <div class="prc-item en">Fully custom implementation</div>
+        <div class="prc-item en">Integration with proprietary systems</div>
+        <div class="prc-item en">Monthly financial advisory included</div>
+        <div class="prc-item en">Priority support 24/7</div>
+        <div class="prc-item en">Team training included</div>
+      </div>
+      <div class="prc-note es">✦ Incluye estudio de factibilidad gratuito</div>
+      <div class="prc-note en">✦ Includes free feasibility study</div>
+      <a href="#contacto" class="prc-cta es">Empezar ahora →</a>
+      <a href="#contacto" class="prc-cta en">Get started →</a>
+    </div>
+    <!-- Expat -->
+    <div class="prc">
+      <div class="prc-seg">Expat · Foreigner in Mexico</div>
+      <div class="prc-name">Expat Tax Plan</div>
+      <div class="prc-amount">
+        <span class="prc-currency">$</span>
+        <span class="prc-val">149</span>
+        <span class="prc-currency">USD</span>
+      </div>
+      <div class="prc-period">per month</div>
+      <div class="prc-usd">~$2,980 MXN · billed in USD for your convenience</div>
+      <div class="prc-divider"></div>
+      <div class="prc-items">
+        <div class="prc-item">Bilingual consultation (EN/ES)</div>
+        <div class="prc-item">RFC registration &amp; SAT profile setup</div>
+        <div class="prc-item">Monthly ISR &amp; IVA filing</div>
+        <div class="prc-item">Tax treaty benefit analysis</div>
+        <div class="prc-item">Rental income compliance (Airbnb/VRBO)</div>
+        <div class="prc-item">Annual tax return (declaración anual)</div>
+        <div class="prc-item">Coordination with US/CA/SE advisor</div>
+      </div>
+      <div class="prc-note">✦ Free 30-min consultation — no obligation</div>
+      <a href="#contacto" class="prc-cta">Book a Free Consultation →</a>
+    </div>
+  </div>
+  <p style="margin-top:1.5rem;font-size:.75rem;color:var(--muted2);line-height:1.65;">
+    <span class="es">* Los precios en MXN se expresan en pesos mexicanos como referencia. El Expat Tax Plan se cotiza en USD para facilidad de clientes extranjeros. Los equivalentes en USD son orientativos y se calculan con base en el tipo de cambio publicado por Banxico al momento de cada transacción.</span>
+    <span class="en">* Prices in MXN are expressed in Mexican pesos for reference. The Expat Tax Plan is quoted in USD for convenience of foreign clients. USD equivalents are indicative and based on the Banxico exchange rate at the time of each transaction.</span>
+  </p>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="nosotros">
+  <div class="about-inner">
+    <div>
+      <div class="sec-label es">Sobre nosotros</div>
+      <div class="sec-label en">About us</div>
+      <h2 class="sec-title es">Automatización<br>que realmente<br>funciona</h2>
+      <h2 class="sec-title en">Automation<br>that actually<br>works</h2>
+      <p style="color:var(--muted);margin-top:1rem;line-height:1.8;font-size:.93rem" class="es">Somos un equipo con experiencia en empresas multinacionales, tecnología y finanzas, que decidió democratizar la automatización y la consultoría fiscal para pequeñas y medianas empresas hispanohablantes — y para la comunidad extranjera en México.</p>
+      <p style="color:var(--muted);margin-top:1rem;line-height:1.8;font-size:.93rem" class="en">We're a team with experience at multinational companies, in technology and finance, that decided to democratize automation and fiscal consulting for small and medium Hispanic businesses — and for the international community in Mexico.</p>
+      <p style="color:var(--muted);margin-top:.85rem;line-height:1.8;font-size:.93rem" class="es">Combinamos la precisión nórdica con el dinamismo latino para construir sistemas que realmente liberen tu tiempo — y que funcionen igual de bien en inglés que en español.</p>
+      <p style="color:var(--muted);margin-top:.85rem;line-height:1.8;font-size:.93rem" class="en">We combine Nordic precision with Latin dynamism to build systems that genuinely free your time — and that work equally well in English and Spanish.</p>
+      <div class="about-list">
+        <div class="about-li es">Implementamos, no solo asesoramos — entregamos sistemas funcionando</div>
+        <div class="about-li en">We implement, not just advise — we deliver working systems</div>
+        <div class="about-li es">Usamos las mismas herramientas en nuestro propio negocio</div>
+        <div class="about-li en">We use the same tools in our own business</div>
+        <div class="about-li es">Experiencia en multinacionales: Pfizer, Bosch y Pepsi</div>
+        <div class="about-li en">Experience at multinationals: Pfizer, Bosch, and Pepsi</div>
+        <div class="about-li es">Servicio bilingüe inglés/español para expats y empresas internacionales</div>
+        <div class="about-li en">Bilingual English/Spanish service for expats and international businesses</div>
+        <div class="about-li es">Soporte continuo para que tu automatización nunca se detenga</div>
+        <div class="about-li en">Ongoing support so your automation never stops running</div>
+      </div>
+    </div>
+    <div>
+      <div class="about-visual">
+        <div class="sec-label" style="margin-bottom:1.5rem">Automation Flow</div>
+        <div class="flow-step-item"><div class="flow-dot"></div><div class="flow-text es">Llega un correo, pedido o solicitud</div><div class="flow-text en">An email, order, or request arrives</div></div>
+        <div class="flow-arrow-item">↓</div>
+        <div class="flow-step-item"><div class="flow-dot"></div><div class="flow-text es">La IA lo analiza y clasifica</div><div class="flow-text en">AI analyzes and classifies it</div></div>
+        <div class="flow-arrow-item">↓</div>
+        <div class="flow-step-item"><div class="flow-dot"></div><div class="flow-text es">Se extrae la información clave</div><div class="flow-text en">Key information is extracted</div></div>
+        <div class="flow-arrow-item">↓</div>
+        <div class="flow-step-item"><div class="flow-dot"></div><div class="flow-text es">Tu sistema se actualiza automáticamente</div><div class="flow-text en">Your system updates automatically</div></div>
+        <div class="flow-arrow-item">↓</div>
+        <div class="flow-step-item"><div class="flow-dot" style="background:var(--green)"></div><div class="flow-text es" style="color:var(--green);font-weight:600">Tu reporte está listo ✓</div><div class="flow-text en" style="color:var(--green);font-weight:600">Your report is ready ✓</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contacto">
+  <div class="contact-inner">
+    <div>
+      <div class="sec-label es">Contacto</div>
+      <div class="sec-label en">Contact</div>
+      <h2 class="sec-title es">Solicita tu estudio<br>de factibilidad<br><em style="font-style:normal;color:var(--gold)">gratuito</em></h2>
+      <h2 class="sec-title en">Request your free<br>feasibility<br><em style="font-style:normal;color:var(--gold)">study</em></h2>
+      <p style="color:var(--muted);margin-top:1rem;font-size:.93rem;line-height:1.8" class="es">Cuéntanos sobre tu negocio y en menos de 24 horas te decimos exactamente qué puedes automatizar, cuánto tiempo recuperarías y qué plan te conviene — sin costo y sin compromiso.</p>
+      <p style="color:var(--muted);margin-top:1rem;font-size:.93rem;line-height:1.8" class="en">Tell us about your business and within 24 hours we'll tell you exactly what you can automate, how much time you'd recover, and which plan makes sense — at no cost and no obligation.</p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-item-label es">Cobertura</div>
+            <div class="contact-item-label en">Coverage</div>
+            <div class="contact-item-value es">México, LATAM &amp; expats — 100% remoto</div>
+            <div class="contact-item-value en">Mexico, LATAM &amp; expats — 100% remote</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-value">hola@enkelsumma.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">💬</div>
+          <div>
+            <div class="contact-item-label es">Idiomas</div>
+            <div class="contact-item-label en">Languages</div>
+            <div class="contact-item-value">Español &amp; English</div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-lang-note">🌎 Expats &amp; foreigners: we reply in English. Book your free 30-minute consultation using the form.</div>
+    </div>
+    <form class="contact-form" id="contact-form">
+      <div class="form-group">
+        <label><span class="es">Nombre completo</span><span class="en">Full name</span></label>
+        <input type="text" placeholder="Tu nombre / Your name">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="tu@empresa.com">
+      </div>
+      <div class="form-group">
+        <label><span class="es">Empresa o actividad</span><span class="en">Company or activity</span></label>
+        <input type="text" placeholder="Empresa o profesión / Company or profession">
+      </div>
+      <div class="form-group">
+        <label><span class="es">Soy</span><span class="en">I am</span></label>
+        <select>
+          <option value=""><span class="es">Selecciona tu perfil</span></option>
+          <option class="es">Dueño de PYME</option>
+          <option class="es">Freelancer / Profesionista independiente</option>
+          <option class="es">Emprendedor</option>
+          <option>Expat / Foreigner living in Mexico</option>
+          <option>Digital Nomad / Remote Worker</option>
+          <option>Property Owner in Mexico</option>
+          <option class="es">Otro / Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label><span class="es">¿En qué podemos ayudarte?</span><span class="en">How can we help?</span></label>
+        <select>
+          <option value=""><span class="es">Selecciona una opción</span><span class="en">Select an option</span></option>
+          <option class="es">Gestión de correos con IA</option>
+          <option class="es">Conexión entre herramientas</option>
+          <option class="es">Reportes e informes automáticos</option>
+          <option class="es">Contabilidad y finanzas / CFDIs</option>
+          <option>Expat tax filing &amp; compliance</option>
+          <option>Tax residency &amp; 183-day rule</option>
+          <option>Property purchase &amp; fideicomiso</option>
+          <option>Remote work / digital nomad setup</option>
+          <option class="es">No sé — quiero el estudio gratuito</option>
+          <option class="en">Not sure — I want the free feasibility study</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label><span class="es">Cuéntanos más</span><span class="en">Tell us more</span></label>
+        <textarea rows="3" placeholder="¿Cuántas personas trabajan contigo? ¿Cuál es tu mayor dolor operativo hoy? (English is fine too!)"></textarea>
+      </div>
+      <button type="submit" class="form-submit">
+        <span class="es">Solicitar consulta gratuita →</span>
+        <span class="en">Book Free Consultation →</span>
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Enkel<em>.</em>Summa</div>
+  <p class="es">© 2025 EnkelSumma · Automatización Inteligente · Consultoría Fiscal Bilingüe · México &amp; LATAM</p>
+  <p class="en">© 2025 EnkelSumma · Smart Automation · Bilingual Tax Advisory · Mexico &amp; LATAM</p>
+</footer>
+
+<script>
+// ─── LANG TOGGLE ──────────────────────────────────
+function setLang(l){
+  document.body.classList.toggle('lang-en', l==='en');
+  ['btn-es','btn-en','mbtn-es','mbtn-en'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(el) el.classList.toggle('on', id.includes(l));
+  });
+}
+
+// ─── HAMBURGER ────────────────────────────────────
+var ham=document.getElementById('ham');
+var mob=document.getElementById('mob-menu');
+ham.addEventListener('click',function(){
+  ham.classList.toggle('open');
+  mob.classList.toggle('open');
+});
+mob.querySelectorAll('a').forEach(function(a){
+  a.addEventListener('click',function(){
+    ham.classList.remove('open');
+    mob.classList.remove('open');
+  });
+});
+
+// ─── SERVICE TABS ─────────────────────────────────
+function showTab(t){
+  ['pyme','pf','expat'].forEach(function(s){
+    document.getElementById('stab-'+s).classList.toggle('on', s===t);
+    document.getElementById('spanel-'+s).classList.toggle('on', s===t);
+  });
+}
+
+// ─── CALCULATOR ───────────────────────────────────
+var slH=document.getElementById('sl-hrs');
+var slR=document.getElementById('sl-rate');
+function recalc(){
+  var h=parseInt(slH.value), r=parseInt(slR.value);
+  document.getElementById('hrs-val').textContent=h+' hrs';
+  document.getElementById('rate-val').textContent='$'+r.toLocaleString();
+  var cost=h*r;
+  var plan=cost>=8000?2980:1500;
+  var save=cost-plan;
+  document.getElementById('r-costo').textContent='$'+cost.toLocaleString();
+  document.getElementById('r-plan').textContent='$'+plan.toLocaleString();
+  document.getElementById('r-ahorro').textContent=(save>=0?'+':'')+save.toLocaleString();
+  document.getElementById('r-anual').textContent=(save*12>=0?'+':'')+(save*12).toLocaleString();
+}
+slH.addEventListener('input',recalc);
+slR.addEventListener('input',recalc);
+recalc();
+
+// ─── CONTACT FORM ─────────────────────────────────
+document.getElementById('contact-form').addEventListener('submit',function(e){
+  e.preventDefault();
+  var btn=this.querySelector('.form-submit');
+  btn.textContent='✓ Enviado / Sent';
+  btn.style.opacity='.6';
+  btn.disabled=true;
+});
+</script>
+</body>
+</html>
